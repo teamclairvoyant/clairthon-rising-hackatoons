@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { RegistrationForm } from '../components/registration-form/registration-form.component';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class CandidateRegistrationService {
    */
   constructor(private http: HttpClient) {}
 
-  public addCandidateRegistration(): Observable<any> {
+  public addCandidateRegistration(candidateDetails: RegistrationForm): Observable<any> {
     const requestBody = {
       id: 1,
       name: 'Sneha Devadiga',

@@ -4,17 +4,17 @@ import { CandidateRegistrationRoutingModule } from './candidate-registration-rou
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [RegistrationFormComponent],
   imports: [
     CommonModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     NgMultiSelectDropDownModule.forRoot(),
     CandidateRegistrationRoutingModule,
-    HttpClientModule,
   ],
   exports: [CommonModule],
 })
