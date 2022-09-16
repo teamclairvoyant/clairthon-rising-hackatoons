@@ -1,1 +1,58 @@
-<p>upload-questions works!</p>
+<div class="container">
+  <div class="card">
+    <h2 class="text-center p-2">Upload Questions for Bank</h2>
+    <form class="card-body" [formGroup]="uploadQuestionForm">
+      <div class="form-group">
+        <label for="technology">Technology</label>
+        <input type="text" class="form-control" id="technology" formControlName="technology" />
+      </div>
+      <div class="form-group">
+        <label for="exp">Experience</label>
+        <input type="text" class="form-control" id="exp" formControlName="experience" />
+      </div>
+      <div class="form-group">
+        <label for="difficultyLevel">Difficulty Level</label>
+        <select class="form-control" formControlName="difficultyLevel" id="difficultyLevel">
+          <option>Beginner</option>
+          <option>Expert</option>
+          <option>Proficient</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exp">Select the category of Question</label>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="questionCategory"
+            id="codingTest"
+            formControlValue="questionCategory"
+            disabled
+          />
+          <label class="form-check-label" for="codingTest"> Coding Test </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="questionCategory"
+            id="questionBank"
+            formControlValue="questionCategory"
+            checked
+          />
+          <label class="form-check-label" for="questionBank"> Bank </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="uploadQuestion">Upload Questions List</label>
+        <input type="file" class="form-control" id="uploadQuestion" formControlValue="question" />
+      </div>
+      <div class="form-group">
+        <label for="options">Options</label>
+        <button type="btn" class="form-control" id="options" disabled formControlValue="options">+</button>
+      </div>
+      <br />
+      <button type="btn" class="btn btn-primary" (click)="addQuestions()">Submit</button>
+    </form>
+  </div>
+</div>
