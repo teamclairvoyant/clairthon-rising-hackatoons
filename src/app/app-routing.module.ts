@@ -1,9 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './modules/home/home.component';
 
 const routes: Routes = [
   {
-    path: 'coding-test',
+    path: 'home',
+    component: HomeComponent,
+  },
+  {
+    path: 'general-instructions',
     loadChildren: () => import('./modules/coding-test/coding-test.module').then((m) => m.CodingTestModule),
   },
   {
