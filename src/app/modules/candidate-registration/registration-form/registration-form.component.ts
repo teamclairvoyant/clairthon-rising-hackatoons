@@ -1,5 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CandidateRegistrationService } from '../services/candidate-registration.service';
+
+/**
+ * Interface model for candidate registration form
+ */
+export interface RegistrationForm {
+  /**
+   * Unique ID for candidate
+   */
+  id: string;
+  /**
+   * Candidate name
+   */
+  name: string;
+  /**
+   * Candidate email
+   */
+  email: string;
+  /**
+   * Candidate contact number
+   */
+  contactNumber: string;
+  /**
+   * Candidate technical skills
+   */
+  techSkills: { id: number; name: string }[];
+  /**
+   * Candidate technical experience
+   */
+  techExperience: string;
+  /**
+   * Open posistion for interview
+   */
+  openPosition?: string;
+}
 
 @Component({
   selector: 'app-registration-form',
@@ -11,6 +46,10 @@ export class RegistrationFormComponent implements OnInit {
    * Registration form to fill candidate information
    */
   registrationForm: FormGroup = {} as FormGroup;
+  /**
+   * Generated test link
+   */
+  testLink = 'dummy_generated_test_link';
   /**
    * Candidate's total years of technical experience
    */
@@ -57,7 +96,7 @@ export class RegistrationFormComponent implements OnInit {
     allowSearchFilter: false,
   };
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private candidateRegSer: CandidateRegistrationService) {}
 
   ngOnInit(): void {
     this.createRegistrationForm();
@@ -65,9 +104,10 @@ export class RegistrationFormComponent implements OnInit {
 
   private createRegistrationForm(): void {
     this.registrationForm = this.fb.group({
+      id: Math.random(),
       name: this.fb.control('', [Validators.required]),
       email: this.fb.control('', [Validators.required, Validators.email]),
-      contactNumber: this.fb.control('', [Validators.required]),
+      contactNumber: this.fb.control(null, [Validators.required, Validators.pattern('^[0-9]{10}$')]),
       techSkills: this.fb.control([], [Validators.required]),
       techExperience: this.fb.control('', [Validators.required]),
       openPosition: this.fb.control(''),
@@ -75,11 +115,19 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   public submitRegistrationForm(registrationForm: FormGroup): void {
-    console.log('form: ', registrationForm);
+    this.candidateRegSer.registarCandidate(registrationForm.value).subscribe((response) => {
+      if (response) {
+        alert('success');
+      }
+    });
   }
 
   public generateTestLink(registrationForm: FormGroup): void {
     // TODO - add check here, if user directly clicks on generateTestLink button then first submit the form and then generate test
     this.submitRegistrationForm(registrationForm);
+  }
+
+  public copyTestLinkToClipboard(inputElement: any): void {
+    // TODO - add copy to clipboard functionality
   }
 }

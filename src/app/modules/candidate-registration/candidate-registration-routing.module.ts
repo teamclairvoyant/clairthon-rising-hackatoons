@@ -6,11 +6,12 @@ const routes: Routes = [
   {
     path: '',
     component: RegistrationFormComponent,
+    pathMatch: 'full',
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class CandidateRegistrationRoutingModule { }
+export class CandidateRegistrationRoutingModule {}
