@@ -116,9 +116,11 @@ export class RegistrationFormComponent implements OnInit {
 
   public submitRegistrationForm(registrationForm: FormGroup): void {
     console.log('form: ', registrationForm.value);
-    this.candidateRegistrationService.addCandidateRegistration().subscribe((response: any) => {
-      console.log('response', response);
-    });
+    this.candidateRegistrationService
+      .addCandidateRegistration(this.registrationForm.value)
+      .subscribe((response: any) => {
+        console.log('response', response);
+      });
   }
 
   public generateTestLink(registrationForm: FormGroup): void {
