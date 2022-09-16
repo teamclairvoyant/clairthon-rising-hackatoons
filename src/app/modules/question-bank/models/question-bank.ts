@@ -11,9 +11,9 @@ export interface UploadQuestion {
    */
   technology: string;
   /**
-   * Experience level for which questions can be asked
+   * Experience level for which questions can be asked, it will be in years
    */
-  experience: string;
+  experience: number;
   /**
    * Difficulty level of question
    */
@@ -35,16 +35,16 @@ export interface UploadQuestion {
 /**
  * Enum for Difficulty level
  */
-enum DifficultyLevel {
-  Easy,
-  Medium,
-  Difficult,
+export enum DifficultyLevel {
+  Beginner,
+  Intermediate,
+  Expert,
 }
 
 /**
  * Enum for Category
  */
-enum Category {
+export enum Category {
  CodingTest,
  QuestionBank
 }
