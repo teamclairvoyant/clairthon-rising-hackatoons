@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CandidateRegistrationService } from '../services/candidate-registration.service';
+import { ToastrService } from 'ngx-toastr';
+import { CandidateRegistrationService } from '../../services/candidate-registration.service';
 
 /**
  * Interface model for candidate registration form
@@ -96,7 +97,11 @@ export class RegistrationFormComponent implements OnInit {
     allowSearchFilter: false,
   };
 
-  constructor(private fb: FormBuilder, private candidateRegSer: CandidateRegistrationService) {}
+  constructor(
+    private fb: FormBuilder,
+    public candidateRegistrationService: CandidateRegistrationService,
+    private toastr: ToastrService,
+  ) {}
 
   ngOnInit(): void {
     this.createRegistrationForm();
@@ -115,11 +120,15 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   public submitRegistrationForm(registrationForm: FormGroup): void {
-    this.candidateRegSer.registarCandidate(registrationForm.value).subscribe((response) => {
-      if (response) {
-        alert('success');
-      }
-    });
+    console.log('form: ', registrationForm.value);
+    this.candidateRegistrationService
+      .addCandidateRegistration(this.registrationForm.value)
+      .subscribe((response: any) => {
+        if (response?.statusCode) {
+          this.toastr.success('Candidate Information Saved Successfully');
+          this.registrationForm.reset();
+        }
+      });
   }
 
   public generateTestLink(registrationForm: FormGroup): void {
