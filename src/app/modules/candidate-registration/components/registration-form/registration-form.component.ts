@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CandidateRegistrationService } from '../../services/candidate-registration.service';
 
 @Component({
   selector: 'app-registration-form',
@@ -57,7 +58,7 @@ export class RegistrationFormComponent implements OnInit {
     allowSearchFilter: false,
   };
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, public cd: CandidateRegistrationService) {}
 
   ngOnInit(): void {
     this.createRegistrationForm();
@@ -75,7 +76,10 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   public submitRegistrationForm(registrationForm: FormGroup): void {
-    console.log('form: ', registrationForm);
+    console.log('form: ', registrationForm.value);
+    this.cd.addCandidateRegistration().subscribe((response: any) => {
+      console.log('response', response);
+    });
   }
 
   public generateTestLink(registrationForm: FormGroup): void {

@@ -4,6 +4,7 @@ import { CandidateRegistrationRoutingModule } from './candidate-registration-rou
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [RegistrationFormComponent],
@@ -13,6 +14,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     ReactiveFormsModule,
     NgMultiSelectDropDownModule.forRoot(),
     CandidateRegistrationRoutingModule,
+    HttpClientModule,
   ],
+  exports: [CommonModule],
 })
 export class CandidateRegistrationModule {}
