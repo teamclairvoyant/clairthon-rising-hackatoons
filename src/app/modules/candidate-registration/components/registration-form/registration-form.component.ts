@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { CandidateRegistrationService } from '../../services/candidate-registration.service';
 
 /**
@@ -96,7 +97,11 @@ export class RegistrationFormComponent implements OnInit {
     allowSearchFilter: false,
   };
 
-  constructor(private fb: FormBuilder, public candidateRegistrationService: CandidateRegistrationService) {}
+  constructor(
+    private fb: FormBuilder,
+    public candidateRegistrationService: CandidateRegistrationService,
+    private toastr: ToastrService,
+  ) {}
 
   ngOnInit(): void {
     this.createRegistrationForm();
@@ -119,7 +124,10 @@ export class RegistrationFormComponent implements OnInit {
     this.candidateRegistrationService
       .addCandidateRegistration(this.registrationForm.value)
       .subscribe((response: any) => {
-        console.log('response', response);
+        if (response?.statusCode) {
+          this.toastr.success('Candidate Information Saved Successfully');
+          this.registrationForm.reset();
+        }
       });
   }
 
