@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UploadQuestionsComponent } from './upload-questions.component';
 
 describe('UploadQuestionsComponent', () => {
@@ -8,9 +8,10 @@ describe('UploadQuestionsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UploadQuestionsComponent ]
-    })
-    .compileComponents();
+      declarations: [UploadQuestionsComponent],
+      imports: [FormsModule, ReactiveFormsModule],
+      providers: [FormBuilder],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(UploadQuestionsComponent);
     component = fixture.componentInstance;
@@ -19,5 +20,11 @@ describe('UploadQuestionsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should create form on ngOnInit', () => {
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(component.uploadQuestionForm).toBeTruthy();
   });
 });
