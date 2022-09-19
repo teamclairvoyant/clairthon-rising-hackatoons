@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './modules/home/home.component';
+import { HomeComponent } from './modules/shared/components/home/home.component';
 
 const routes: Routes = [
   {
@@ -21,6 +21,11 @@ const routes: Routes = [
   {
     path: 'question-bank',
     loadChildren: () => import('./modules/question-bank/question-bank.module').then((m) => m.QuestionBankModule),
+  },
+  {
+    path: '',
+    component: HomeComponent,
+    pathMatch: 'full',
   },
 ];
 

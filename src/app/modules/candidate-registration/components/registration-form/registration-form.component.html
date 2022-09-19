@@ -1,0 +1,149 @@
+<div class="container">
+  <div class="card">
+    <div class="d-flex justify-content-center">
+      <h2 class="p-2">Candidate Registration Form</h2>
+    </div>
+    <form class="p-5 card-body" [formGroup]="registrationForm" (ngSubmit)="submitRegistrationForm(registrationForm)">
+      <div class="form-group">
+        <label for="name"> Name: </label>
+        <input id="name" class="form-control" formControlName="name" placeholder="Candidate full name" />
+        <small
+          class="text-danger"
+          *ngIf="
+            registrationForm.get('name')?.invalid &&
+            (registrationForm.get('name')?.dirty || registrationForm.get('name')?.touched)
+          "
+        >
+          Please provide full name.
+        </small>
+      </div>
+      <div class="form-group mt-3">
+        <label for="email"> Email: </label>
+        <input id="email" type="email" class="form-control" formControlName="email" placeholder="Candidate email" />
+        <small
+          class="text-danger"
+          *ngIf="
+            registrationForm.get('email')?.invalid &&
+            (registrationForm.get('email')?.dirty || registrationForm.get('email')?.touched)
+          "
+        >
+          Please provide a valid email address.
+        </small>
+      </div>
+      <div class="form-group mt-3">
+        <label for="contact_number"> Contact Number: </label>
+        <input
+          id="contact_number"
+          class="form-control"
+          formControlName="contactNumber"
+          placeholder="Candidate contact number"
+        />
+        <small
+          class="text-danger"
+          *ngIf="
+            registrationForm.get('contactNumber')?.invalid &&
+            (registrationForm.get('contactNumber')?.dirty ||
+              registrationForm.get('contactNumber')?.touched ||
+              registrationForm.get('contactNumber')?.hasError('pattern'))
+          "
+        >
+          Please provide a valid 10 digit contact number.
+        </small>
+      </div>
+      <div class="form-group mt-3">
+        <label for="tech_skills"> Technical Skills: </label>
+        <ng-multiselect-dropdown
+          [placeholder]="'Select Technical Skills'"
+          [settings]="dropdownSettings"
+          [data]="skillsList"
+          formControlName="techSkills"
+        >
+        </ng-multiselect-dropdown>
+        <small
+          class="text-danger"
+          *ngIf="
+            registrationForm.get('techSkills')?.invalid &&
+            (registrationForm.get('techSkills')?.dirty || registrationForm.get('techSkills')?.touched)
+          "
+        >
+          Please provide technical skills.
+        </small>
+      </div>
+      <div class="form-group mt-3">
+        <label for="tech_experience"> Technical Experience: </label>
+        <div *ngFor="let exp of yearsOfExperience; let i = index">
+          <input
+            type="radio"
+            id="tech_experience"
+            formControlName="techExperience"
+            id="radio{{ i }}"
+            name="techExperience"
+            [value]="exp.id"
+          />
+          <label class="custom-control-label m-1" for="radio{{ i }}">
+            {{ exp.years || '?' }}
+          </label>
+        </div>
+        <small
+          class="text-danger"
+          *ngIf="
+            registrationForm.get('techExperience')?.invalid &&
+            (registrationForm.get('techExperience')?.dirty || registrationForm.get('techExperience')?.touched)
+          "
+        >
+          Please provide years of technical experience.
+        </small>
+      </div>
+      <div class="form-group mt-3">
+        <label for="open_positions"> Open Positions: </label>
+        <input id="open_positions" class="form-control" formControlName="openPosition" placeholder="Open positions" />
+        <small
+          *ngIf="
+            registrationForm.get('openPosition')?.invalid &&
+            (registrationForm.get('openPosition')?.dirty || registrationForm.get('openPosition')?.touched)
+          "
+        >
+          Please provide open positions.
+        </small>
+      </div>
+      <div class="form-group mt-3 d-flex justify-content-center">
+        <button class="rounded btn btn-light border" type="submit" [disabled]="registrationForm.invalid">
+          Submit Form
+        </button>
+        <button
+          class="ms-3 rounded btn btn-light border"
+          type="button"
+          [disabled]="registrationForm.invalid"
+          (click)="generateTestLink(registrationForm)"
+          data-bs-toggle="modal"
+          data-bs-target="#generateTestLink"
+        >
+          Generate Test Link
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- modal -->
+<div class="modal fade" id="generateTestLink" tabindex="-1" aria-labelledby="test-link" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="test-link">Generated Test link</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body form-group">
+        <label> Test Link: </label>
+        <div>
+          <input class="test-link" type="text" readonly [(ngModel)]="testLink" #test_link />
+          <span (click)="copyTestLinkToClipboard(test_link)">
+            <img src="../../../../assets/images/copy-icon.svg" alt="copy" width="34" height="34" />
+          </span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
