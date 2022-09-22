@@ -120,7 +120,6 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   public submitRegistrationForm(registrationForm: FormGroup): void {
-    console.log('form: ', registrationForm.value);
     this.candidateRegistrationService
       .addCandidateRegistration(this.registrationForm.value)
       .subscribe((response: any) => {

@@ -21,10 +21,4 @@ describe('UploadQuestionsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should create form on ngOnInit', () => {
-    component.ngOnInit();
-    fixture.detectChanges();
-    expect(component.uploadQuestionForm).toBeTruthy();
-  });
 });

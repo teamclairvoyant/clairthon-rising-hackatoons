@@ -1,0 +1,54 @@
+.card {
+  border: #fe9800 1px solid;
+}
+.upload-question {
+  padding: 4rem;
+  margin: 4rem;
+  border: dashed 5px #fe9800;
+
+  .browse-btn {
+    background-color: red;
+  }
+}
+
+.name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #353f4a;
+  margin: 0;
+}
+
+.size {
+  font-size: 12px;
+  font-weight: 500;
+  color: #a4a4a4;
+  margin: 0;
+  margin-bottom: 0.25rem;
+}
+
+.progress-cont {
+  height: 7px;
+  width: 100%;
+  border-radius: 4px;
+  background-color: #d0d0d0;
+  position: relative;
+
+  .progress {
+    width: 0;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    border-radius: 4px;
+    background-color: #4c97cb;
+    transition: 0.5s all;
+  }
+}
+
+.upload-btn {
+  background-color: #fe9800;
+  color: #ffffff;
+  font-weight: 700;
+  border: none;
+}
