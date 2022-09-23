@@ -1,0 +1,47 @@
+.card {
+  border: #fe9800 1px solid;
+}
+.upload-question {
+  padding: 3rem;
+  margin: 3rem;
+  border: dashed 5px #fe9800;
+
+  .browse-btn {
+    background-color: red;
+  }
+}
+
+.name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #353f4a;
+  margin: 0;
+}
+
+.size {
+  font-size: 12px;
+  font-weight: 500;
+  color: #a4a4a4;
+  margin: 0;
+  margin-bottom: 0.25rem;
+}
+
+.progress-container {
+  height: 4px;
+  border-radius: 4px;
+  background-color: #d0d0d0;
+
+  .progress {
+    width: 0;
+    height: 100%;
+    background-color: #fe9800;
+    transition: 0.5s all;
+  }
+}
+
+.upload-btn {
+  background-color: #fe9800;
+  color: #ffffff;
+  font-weight: 700;
+  border: none;
+}
