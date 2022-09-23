@@ -10,7 +10,20 @@
             <a class="nav-link" [routerLink]="['./candidate-registration']">Candidate Registration</a>
           </li> -->
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['./question-bank']">Question bank</a>
+            <div class="row">
+              <div class="col">
+                <div ngbDropdown>
+                  <button type="button" class="btn" id="dropdownBasic1" ngbDropdownToggle>
+                    Question bank
+                  </button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem>Download Format</button>
+                    <button ngbDropdownItem>Download Questions</button>
+                    <button ngbDropdownItem>Upload Questions</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" [routerLink]="['./general-instructions']">General Instructions</a>
