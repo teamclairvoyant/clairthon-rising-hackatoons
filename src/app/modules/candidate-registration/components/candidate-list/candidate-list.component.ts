@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { RegistrationForm } from '../../modals/candidate';
@@ -106,14 +106,22 @@ const candidate: RegistrationForm[] = [
   templateUrl: './candidate-list.component.html',
   styleUrls: ['./candidate-list.component.scss'],
 })
-export class CandidateListComponent implements OnInit {
-  displayedColumns: string[] = ['Name', 'EmailId', 'Technical Skills', 'Experience','Open Position','Completion Date','Result','TestLink','Edit'];
+export class CandidateListComponent {
+  displayedColumns: string[] = [
+    'Name',
+    'EmailId',
+    'Technical Skills',
+    'Experience',
+    'Open Position',
+    'Completion Date',
+    'Result',
+    'TestLink',
+    'Edit',
+  ];
   dataSource = candidate;
   constructor(
     private fb: FormBuilder,
     public candidateRegistrationService: CandidateRegistrationService,
     private toastr: ToastrService,
   ) {}
-
-  ngOnInit(): void {}
 }

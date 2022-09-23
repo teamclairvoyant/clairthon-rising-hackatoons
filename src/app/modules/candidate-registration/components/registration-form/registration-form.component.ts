@@ -90,7 +90,7 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   public submitRegistrationForm(registrationForm: FormGroup): void {
-    this.candidateRegistrationService.addCandidateRegistration(registrationForm.value).subscribe(
+    this.candidateRegistrationService.addCandidateRegistration(this.registrationForm.value).subscribe(
       (response: any) => {
         if (response?.statusCode) {
           this.toastr.success('Candidate Information Saved Successfully');

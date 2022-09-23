@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { QuestionBankRoutingModule } from './question-bank-routing.module';
 import { UploadQuestionsComponent } from './components/upload-questions/upload-questions.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [UploadQuestionsComponent],
-  imports: [CommonModule, QuestionBankRoutingModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, QuestionBankRoutingModule, FormsModule, ReactiveFormsModule, NgbProgressbarModule],
 })
 export class QuestionBankModule {}
