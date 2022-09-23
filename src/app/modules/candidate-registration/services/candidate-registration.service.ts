@@ -10,7 +10,7 @@ export class CandidateRegistrationService {
   /**
    * Base url to hit the backend api
    */
-  private baseUrl = 'https://jzoznlcnii.execute-api.ap-south-1.amazonaws.com/dev/registercandidatedetails';
+  private baseUrl = 'https://jzoznlcnii.execute-api.ap-south-1.amazonaws.com/dev/';
   /**
    * Constructor for CandidateRegistrationService
    * @param http an instance of {@link HttpClient} to make HTTP requests
@@ -25,6 +25,6 @@ export class CandidateRegistrationService {
     //   skill: 'Java Backend Engineer',
     //   'years of experience': 9,
     // };
-    return this.http.post<any>(this.baseUrl, candidateDetails);
+    return this.http.post<any>(`${this.baseUrl}registercandidatedetails`, candidateDetails);
   }
 }
