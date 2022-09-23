@@ -1,11 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.css';
+@import './assets/fonts/stylesheet.css';
+
+* {
+  font-family: 'Calibri';
+}
 
 body {
   background-color: #fe9800;
-  //font-family: 'Open Sans', sans-serif;
-  font-family: 'Reem Kufi Ink rev=2';
 }
+
 .backgroundImage {
   width: 50%;
 }
