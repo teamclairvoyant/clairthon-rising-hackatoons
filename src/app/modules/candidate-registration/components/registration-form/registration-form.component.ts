@@ -1,41 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CandidateRegistrationService } from '../../services/candidate-registration.service';
-
-/**
- * Interface model for candidate registration form
- */
-export interface RegistrationForm {
-  /**
-   * Unique ID for candidate
-   */
-  id: string;
-  /**
-   * Candidate name
-   */
-  name: string;
-  /**
-   * Candidate email
-   */
-  email: string;
-  /**
-   * Candidate contact number
-   */
-  contactNumber: string;
-  /**
-   * Candidate technical skills
-   */
-  techSkills: { id: number; name: string }[];
-  /**
-   * Candidate technical experience
-   */
-  techExperience: string;
-  /**
-   * Open posistion for interview
-   */
-  openPosition?: string;
-}
 
 @Component({
   selector: 'app-registration-form',
@@ -83,6 +50,8 @@ export class RegistrationFormComponent implements OnInit {
     { id: 5, name: 'JavaScript' },
     { id: 6, name: 'Python' },
     { id: 7, name: 'Scala' },
+    { id: 7, name: 'Angular' },
+    { id: 8, name: 'Azure' },
   ];
   /**
    * Ng-Multiselect dropdown default settings
@@ -101,6 +70,7 @@ export class RegistrationFormComponent implements OnInit {
     private fb: FormBuilder,
     public candidateRegistrationService: CandidateRegistrationService,
     private toastr: ToastrService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -109,7 +79,7 @@ export class RegistrationFormComponent implements OnInit {
 
   private createRegistrationForm(): void {
     this.registrationForm = this.fb.group({
-      id: Math.random(),
+      id: null,
       name: this.fb.control('', [Validators.required]),
       email: this.fb.control('', [Validators.required, Validators.email]),
       contactNumber: this.fb.control(null, [Validators.required, Validators.pattern('^[0-9]{10}$')]),
@@ -120,15 +90,18 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   public submitRegistrationForm(registrationForm: FormGroup): void {
-    console.log('form: ', registrationForm.value);
-    this.candidateRegistrationService
-      .addCandidateRegistration(this.registrationForm.value)
-      .subscribe((response: any) => {
+    this.candidateRegistrationService.addCandidateRegistration(registrationForm.value).subscribe(
+      (response: any) => {
         if (response?.statusCode) {
           this.toastr.success('Candidate Information Saved Successfully');
           this.registrationForm.reset();
+          this.router.navigate(['./candidate-registration/candidateList']);
         }
-      });
+      },
+      (_error) => {
+        this.toastr.error('Something went wrong, Please try again!!');
+      },
+    );
   }
 
   public generateTestLink(registrationForm: FormGroup): void {
