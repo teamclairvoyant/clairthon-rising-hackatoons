@@ -29,6 +29,7 @@ export class UploadQuestionsComponent {
   }
 
   public onFileChange(event: Event) {
+    this.uploadQuestionProgress = 0;
     this.uploadFilesSimulator(0);
     const target = event.target as HTMLInputElement;
     this.uploadFile = target?.files?.item(0) as File;
@@ -37,6 +38,7 @@ export class UploadQuestionsComponent {
 
   public dropHandler(event: DragEvent) {
     event.preventDefault();
+    this.uploadQuestionProgress = 0;
     this.uploadFilesSimulator(0);
     if (event?.dataTransfer?.items) {
       const fileItem = [...(event.dataTransfer.items as any)].find((item) => item.kind === 'file');

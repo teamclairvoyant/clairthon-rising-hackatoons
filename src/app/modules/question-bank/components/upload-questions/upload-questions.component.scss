@@ -2,8 +2,8 @@
   border: #fe9800 1px solid;
 }
 .upload-question {
-  padding: 4rem;
-  margin: 4rem;
+  padding: 3rem;
+  margin: 3rem;
   border: dashed 5px #fe9800;
 
   .browse-btn {
@@ -26,22 +26,15 @@
   margin-bottom: 0.25rem;
 }
 
-.progress-cont {
-  height: 7px;
-  width: 100%;
+.progress-container {
+  height: 4px;
   border-radius: 4px;
   background-color: #d0d0d0;
-  position: relative;
 
   .progress {
     width: 0;
     height: 100%;
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    border-radius: 4px;
-    background-color: #4c97cb;
+    background-color: #fe9800;
     transition: 0.5s all;
   }
 }
