@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { RegistrationForm } from '../components/registration-form/registration-form.component';
+import { RegistrationForm } from '../modals/candidate';
 
 @Injectable({
   providedIn: 'root',
