@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import { SocialAuthService } from 'angularx-social-login';
-import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -16,11 +16,11 @@ export class AuthGuard implements CanActivate {
         if (user) {
           return true;
         }
+        const requestedRoute = route.url.toString();
+        localStorage.setItem('redirectUri', requestedRoute);
         this.router.navigate(['./login']);
         return true;
       }),
-      //catchError(() => {}),
     );
-    //return of(true);
   }
 }

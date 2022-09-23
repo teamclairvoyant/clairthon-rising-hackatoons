@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SocialAuthService } from 'angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { AuthService } from './modules/shared/services/auth.service';
 
 @Component({

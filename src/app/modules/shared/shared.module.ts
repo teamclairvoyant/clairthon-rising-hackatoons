@@ -1,3 +1,4 @@
+import { SocialLoginModule } from '@abacritt/angularx-social-login';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -10,6 +11,6 @@ import { LoginComponent } from './components/login/login.component';
   declarations: [HeaderComponent, HomeComponent, LoginComponent],
   exports: [HeaderComponent],
   providers: [],
-  imports: [CommonModule, BrowserModule, AppRoutingModule],
+  imports: [CommonModule, BrowserModule, AppRoutingModule, SocialLoginModule],
 })
 export class SharedModule {}

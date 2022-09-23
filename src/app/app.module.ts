@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './modules/shared/shared.module';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
+import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,6 +32,9 @@ import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 
             ),
           },
         ],
+        onError: (err: any) => {
+          console.error(err);
+        },
       } as SocialAuthServiceConfig,
     },
   ],

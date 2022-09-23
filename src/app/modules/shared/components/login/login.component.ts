@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
+import { GoogleLoginProvider, SocialAuthService } from '@abacritt/angularx-social-login';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
@@ -20,7 +20,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       if (user) {
         this.authservice.authUser = user;
         this.authservice.username = user.email;
-        this.router.navigate(['/']);
+        const redirectUri = localStorage.getItem('redirectUri');
+        this.router.navigateByUrl(redirectUri || '/');
       }
     });
   }
