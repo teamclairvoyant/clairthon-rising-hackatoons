@@ -25,6 +25,7 @@
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
     "@popperjs/core": "^2.11.6",
+    "angularx-social-login": "^4.1.0",
     "bootstrap": "^5.2.1",
     "font-awesome": "^4.7.0",
     "lint-staged": "^13.0.3",
