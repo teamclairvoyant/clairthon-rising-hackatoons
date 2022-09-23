@@ -19,6 +19,9 @@ export class UploadQuestionsComponent {
 
   constructor(private questionBankService: QuestionBankService, private toastr: ToastrService) {}
 
+  /**
+   * Method to call service to upload file
+   */
   public addQuestions(): void {
     this.questionBankService.uploadQuestions(this.uploadFile as File).subscribe(() => {
       this.toastr.success('Question(s) uploaded successfully');
@@ -28,26 +31,47 @@ export class UploadQuestionsComponent {
       };
   }
 
+  /**
+   * Method to process file uploaded via browse button
+   * @param event Broswer event
+   */
   public onFileChange(event: Event) {
     this.uploadQuestionProgress = 0;
     this.uploadFilesSimulator(0);
     const target = event.target as HTMLInputElement;
     this.uploadFile = target?.files?.item(0) as File;
-    console.log('file', this.uploadFile);
   }
 
-  public dropHandler(event: DragEvent) {
+  /**
+   * Method to handle dropped file
+   * @param event Drag event
+   * @returns Boolean for invalid file and void for valid file
+   */
+  public dropHandler(event: DragEvent): boolean | void {
     event.preventDefault();
     this.uploadQuestionProgress = 0;
-    this.uploadFilesSimulator(0);
     if (event?.dataTransfer?.items) {
       const fileItem = [...(event.dataTransfer.items as any)].find((item) => item.kind === 'file');
       this.uploadFile = fileItem?.getAsFile();
     } else {
       this.uploadFile = event.dataTransfer?.files?.item(0) as File;
     }
+
+    // validation for valid file type
+    const extension = this.uploadFile?.name.split('.') as string[];
+    if (extension[extension?.length - 1] !== 'csv') {
+      this.toastr.error('Invalid file type, please try uploading CSV file');
+      this.uploadFile = undefined;
+      this.uploadQuestionProgress = 0;
+      return;
+    }
+    this.uploadFilesSimulator(0);
   }
 
+  /**
+   * Method to prevent default drag event
+   * @param event Browser event
+   */
   public dragOverHandler(event: Event) {
     event.preventDefault();
   }
