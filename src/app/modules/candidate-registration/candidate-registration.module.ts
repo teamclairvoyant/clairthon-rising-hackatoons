@@ -5,14 +5,19 @@ import { RegistrationFormComponent } from './components/registration-form/regist
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTableModule } from '@angular/material/table';
+import { RouterModule } from '@angular/router';
+import { CandidateListComponent } from './components/candidate-list/candidate-list.component';
 
 @NgModule({
-  declarations: [RegistrationFormComponent],
+  declarations: [RegistrationFormComponent,CandidateListComponent],
   imports: [
     CommonModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatTableModule,
+    RouterModule,
     NgMultiSelectDropDownModule.forRoot(),
     CandidateRegistrationRoutingModule,
   ],
