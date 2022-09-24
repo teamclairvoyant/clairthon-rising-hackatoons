@@ -1,6 +1,7 @@
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-
+import { MockSocialAuthService } from '../../services/mock/mock-social-auth.service';
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
@@ -11,6 +12,7 @@ describe('HeaderComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [HeaderComponent],
       imports: [RouterTestingModule],
+      providers: [{ provide: SocialAuthService, useClass: MockSocialAuthService }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HeaderComponent);
