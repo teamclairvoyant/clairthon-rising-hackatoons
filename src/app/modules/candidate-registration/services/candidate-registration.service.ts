@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-<<<<<<< HEAD
 import { RegistrationForm } from '../models/candidate';
-=======
-import { RegistrationForm } from '../modals/candidate';
->>>>>>> 1ce422272836cddab3a02ce43cc37176e8d90101
 
 @Injectable({
   providedIn: 'root',
