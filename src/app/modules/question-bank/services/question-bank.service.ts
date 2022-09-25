@@ -8,10 +8,9 @@ import { saveAs } from 'file-saver';
 })
 export class QuestionBankService {
   /**
-   * Base url to hit the backend api
+   * Base url endpoint to hit the backend apis
    */
-  private baseUrl =
-    'https://jzoznlcnii.execute-api.ap-south-1.amazonaws.com/dev/uploadquestions/leetquestpool-questionbank-upload';
+  private baseurl = 'https://jzoznlcnii.execute-api.ap-south-1.amazonaws.com/dev/';
   /**
    * Constructor for CandidateRegistrationService
    * @param http an instance of {@link HttpClient} to make HTTP requests
@@ -20,7 +19,7 @@ export class QuestionBankService {
 
   public uploadQuestions(file: File): Observable<any> {
     const headers = new HttpHeaders().append('Content-Type', 'text/csv');
-    return this.http.put<any>(`${this.baseUrl}/${file?.name}`, file, {
+    return this.http.put<any>(`${this.baseurl}uploadquestions/leetquestpool-questionbank-upload/${file?.name}`, file, {
       headers,
     });
   }
@@ -29,5 +28,15 @@ export class QuestionBankService {
     this.http.get('/assets/templates/format.csv', { responseType: 'blob' }).subscribe((blob) => {
       saveAs(blob, 'question-template.csv');
     });
+  }
+
+  public downloadQuestions(questionsCriteria: any): Observable<any> {
+    // TODO remove this static body and add type for request body
+    const requestBody = {
+      skill: 'java',
+      levelOfDifficulty: 'hard',
+      noOfQuestions: 1,
+    };
+    return this.http.post<any>(`${this.baseurl}downloadquestions`, requestBody);
   }
 }
