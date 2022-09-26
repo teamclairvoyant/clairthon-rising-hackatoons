@@ -1,3 +1,9 @@
-<div class="text-center">
-  <img src="../assets/images/TheRisingHackatoons.jpg" class="backgroundImage" />
+<div class="home-page">
+  <img
+    src="/assets/images/coding-test.jpg"
+    [routerLink]="['./candidate-registration']"
+    class="me-5"
+    *ngIf="isHrTeam$ | async"
+  />
+  <img src="/assets/images/question-bank.jpg" [routerLink]="['./question-bank']" />
 </div>

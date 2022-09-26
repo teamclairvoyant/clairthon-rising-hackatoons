@@ -53,7 +53,13 @@
         </div>
       </div>
       <!-- TODO: ADD div to display progress bar with file icon  -->
-      <button type="btn" class="btn btn-primary upload-btn" (click)="addQuestions()">Upload</button>
+      <button type="button" class="btn btn-primary upload-btn" (click)="addQuestions()" [disabled]="!uploadFile">
+        Upload
+      </button>
+      <!-- TODO: Remove this and integrate api call on dropdown button -->
+      <button type="button" class="btn btn-primary upload-btn ms-2" (click)="questionBankService.downloadCsvFormat()">
+        Download CSV Format
+      </button>
     </div>
   </div>
 </div>

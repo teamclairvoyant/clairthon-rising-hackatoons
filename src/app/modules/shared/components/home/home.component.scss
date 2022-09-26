@@ -1,0 +1,19 @@
+.home-page {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  padding: 4% 20%;
+
+  img {
+    height: 500px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.5s all;
+
+    &:hover {
+      box-shadow: 0 0 10px 10px rgb(255 255 255 / 40%);
+      border-color: rgba(231, 233, 238, 0);
+    }
+  }
+}
