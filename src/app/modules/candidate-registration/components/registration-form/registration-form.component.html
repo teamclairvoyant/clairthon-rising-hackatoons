@@ -134,11 +134,31 @@
       </div>
       <div class="modal-body form-group">
         <label> Test Link: </label>
-        <div>
-          <input class="test-link" type="text" readonly [(ngModel)]="testLink" #test_link />
-          <span (click)="copyTestLinkToClipboard(test_link)">
-            <img src="../../../../assets/images/copy-icon.svg" alt="copy" width="34" height="34" />
+        <div class="p-1">
+          <input class="test-link" type="text" id="testLink" readonly [(ngModel)]="testLink" #test_link />
+          <span
+            class="img-link m-0 position-absolute"
+            role="button"
+            *ngIf="!isTestLinkCopied"
+            (click)="copyTestLinkToClipboard(test_link)"
+          >
+            <img src="../../../../assets/images/copy-icon.svg" [alt]="'copy'" width="34" height="34" />
           </span>
+          <span role="button" class="img-link m-0 position-absolute" *ngIf="isTestLinkCopied">
+            <img src="../../../../assets/images/tick-icon.svg" alt="Copied" width="34" height="34" />
+          </span>
+          <div class="d-flex align-items-center justify-content-between">
+            <a
+              class="open-link cursor-pointer text-underline m-0"
+              [href]="testLink"
+              *ngIf="testLink !== ''"
+              target="_blank"
+              (click)="$event.stopPropagation()"
+            >
+              Open in new window
+            </a>
+            <span class="copied float-right" *ngIf="isTestLinkCopied"> Copied to clipboard </span>
+          </div>
         </div>
       </div>
       <div class="modal-footer">

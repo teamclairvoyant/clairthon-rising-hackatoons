@@ -17,7 +17,11 @@ export class RegistrationFormComponent implements OnInit {
   /**
    * Generated test link
    */
-  testLink = 'dummy_generated_test_link';
+  testLink = '';
+  /**
+   * Boolean to check whether test link is copied to clipboard or not
+   */
+  isTestLinkCopied = false;
   /**
    * Candidate Id
    */
@@ -111,22 +115,17 @@ export class RegistrationFormComponent implements OnInit {
 
   public generateTestLink(): void {
     if (this.candidateId) {
-      this.candidateRegistrationService.generateTestLink(this.candidateId).subscribe(
-        (response: any) => {
-          if (response?.statusCode) {
-            this.toastr.success('Test Link Generated Successfully');
-            console.log('response: ', JSON.parse(response.body));
-            // this.router.navigate(['./candidate-registration/candidateList']);
-          }
-        },
-        (_error) => {
-          this.toastr.error('Something went wrong, Please try again!!');
-        },
-      );
+      this.testLink = `https://jzoznlcnii.execute-api.ap-south-1.amazonaws.com/dev/generatetestlink?candidateId=${this.candidateId}`;
     }
   }
 
   public copyTestLinkToClipboard(inputElement: any): void {
-    // TODO - add copy to clipboard functionality
+    inputElement.select();
+    document.execCommand('copy');
+    inputElement.setSelectionRange(0, 0);
+    this.isTestLinkCopied = !this.isTestLinkCopied;
+    setTimeout(() => {
+      this.isTestLinkCopied = !this.isTestLinkCopied;
+    }, 15000);
   }
 }
