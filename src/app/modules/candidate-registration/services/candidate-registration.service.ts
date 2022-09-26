@@ -27,4 +27,8 @@ export class CandidateRegistrationService {
     // };
     return this.http.post<any>(`${this.baseUrl}registercandidatedetails`, candidateDetails);
   }
+
+  public generateTestLink(candidateId: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}generatetestlink?candidateId=${candidateId}`);
+  }
 }

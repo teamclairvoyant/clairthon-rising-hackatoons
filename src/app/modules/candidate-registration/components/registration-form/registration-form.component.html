@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-center">
       <h2 class="p-2">Candidate Registration Form</h2>
     </div>
-    <form class="p-5 card-body" [formGroup]="registrationForm" (ngSubmit)="submitRegistrationForm(registrationForm)">
+    <form class="p-5 card-body" [formGroup]="registrationForm" (ngSubmit)="submitRegistrationForm()">
       <div class="form-group">
         <label for="name"> Name: </label>
         <input id="name" class="form-control" formControlName="name" placeholder="Candidate full name" />
@@ -113,8 +113,8 @@
         <button
           class="ms-3 rounded btn btn-light border"
           type="button"
-          [disabled]="registrationForm.invalid"
-          (click)="generateTestLink(registrationForm)"
+          [disabled]="candidateId === ''"
+          (click)="generateTestLink()"
           data-bs-toggle="modal"
           data-bs-target="#generateTestLink"
         >
