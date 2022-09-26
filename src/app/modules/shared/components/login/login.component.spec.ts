@@ -1,21 +1,20 @@
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { SocialAuthService, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { MockSocialAuthService } from '../../services/mock/mock-social-auth.service';
-import { HeaderComponent } from './header.component';
 
-describe('HeaderComponent', () => {
-  let component: HeaderComponent;
-  let fixture: ComponentFixture<HeaderComponent>;
+import { LoginComponent } from './login.component';
+
+describe('LoginComponent', () => {
+  let component: LoginComponent;
+  let fixture: ComponentFixture<LoginComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HeaderComponent],
-      imports: [RouterTestingModule],
+      declarations: [LoginComponent],
       providers: [{ provide: SocialAuthService, useClass: MockSocialAuthService }],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(HeaderComponent);
+    fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

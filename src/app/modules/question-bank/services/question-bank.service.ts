@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { saveAs } from 'file-saver';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,12 @@ export class QuestionBankService {
     const headers = new HttpHeaders().append('Content-Type', 'text/csv');
     return this.http.put<any>(`${this.baseUrl}/${file?.name}`, file, {
       headers,
+    });
+  }
+
+  public downloadCsvFormat(): void {
+    this.http.get('/assets/templates/format.csv', { responseType: 'blob' }).subscribe((blob) => {
+      saveAs(blob, 'question-template.csv');
     });
   }
 }

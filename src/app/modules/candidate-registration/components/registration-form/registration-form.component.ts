@@ -21,7 +21,7 @@ export class RegistrationFormComponent implements OnInit {
   /**
    * Candidate Id
    */
-   candidateId = '';
+  candidateId = '';
   /**
    * Candidate's total years of technical experience
    */
@@ -97,7 +97,7 @@ export class RegistrationFormComponent implements OnInit {
     this.candidateRegistrationService.addCandidateRegistration(this.registrationForm.value).subscribe(
       (response: any) => {
         if (response?.statusCode) {
-          this.candidateId = '';
+          this.candidateId = JSON.parse(response.body);
           this.toastr.success('Candidate Information Saved Successfully');
           // this.registrationForm.reset();
           // this.router.navigate(['./candidate-registration/candidateList']);
@@ -115,7 +115,7 @@ export class RegistrationFormComponent implements OnInit {
         (response: any) => {
           if (response?.statusCode) {
             this.toastr.success('Test Link Generated Successfully');
-            console.log("response: ", response);
+            console.log('response: ', JSON.parse(response.body));
             // this.router.navigate(['./candidate-registration/candidateList']);
           }
         },
