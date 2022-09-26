@@ -6,7 +6,7 @@ import { UploadQuestionsComponent } from './components/upload-questions/upload-q
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'upload-questions',
     component: UploadQuestionsComponent,
   },
 ];
