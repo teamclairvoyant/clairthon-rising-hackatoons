@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-center">
       <h2 class="p-2">Download Questions Form</h2>
     </div>
-    <form class="p-5 card-body" [formGroup]="downloadForm" (ngSubmit)="download_csv_file(downloadForm)">
+    <form class="p-5 card-body" [formGroup]="downloadForm">
       <div class="form-group mt-3">
         <label for="tech_skills"> Technical Skills: </label>
         <ng-multiselect-dropdown

@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { QuestionBankService } from '../../services/question-bank.service';
 
 @Component({
   selector: 'app-download-questions',
@@ -81,16 +78,8 @@ export class DownloadQuestionsComponent implements OnInit {
     { id: 8, name: 'Azure' },
   ];
 
-  /**
-   * File object for storing uploaded file
-   */
-  downloadQuestions?: File;
-
   constructor(
-    private questionBankService: QuestionBankService,
-    private toastr: ToastrService,
     private fb: FormBuilder,
-    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -104,37 +93,5 @@ export class DownloadQuestionsComponent implements OnInit {
       questionsCount: this.fb.control('', [Validators.required]),
       level: this.fb.control([]),
     });
-  }
-  
-  /**
-   * Method to call service to upload file
-   */
-  download_csv_file(downloadForm: any): void {
-    //define the heading for each row of the data
-    var csv = 'Name,Profession\n';
-
-    //merge the data with CSV
-    this.csvFileData.forEach(function (row) {
-      csv += row.join(',');
-      csv += '\n';
-    });
-
-    //display the created CSV data on the web browser
-    document.write(csv);
-    var hiddenElement = document.createElement('a');
-    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
-    hiddenElement.target = '_blank';
-
-    //provide the name for the CSV file to be downloaded
-    hiddenElement.download = 'Famous Personalities.csv';
-    hiddenElement.click();
-  }
-
-  /**
-   * Method to process file download via browse button
-   * @param event Broswer event
-   */
-  public onFileChange(event: Event) {
-    const target = event.target as HTMLInputElement;
-  }
+  } 
 }
