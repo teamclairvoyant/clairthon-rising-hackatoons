@@ -1,6 +1,7 @@
 /**
  * Interface model for candidate registration form
  */
+
 export interface RegistrationForm {
   /**
    * Unique ID for candidate
