@@ -57,6 +57,7 @@
           placeholder="Questions Count"
         />
         <small
+          class="text-danger"
           *ngIf="
             downloadForm.get('questionsCount')?.invalid &&
             (downloadForm.get('questionsCount')?.dirty || downloadForm.get('questionsCount')?.touched)
