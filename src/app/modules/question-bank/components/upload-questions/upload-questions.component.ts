@@ -17,7 +17,7 @@ export class UploadQuestionsComponent {
    */
   uploadFile?: File;
 
-  constructor(private questionBankService: QuestionBankService, private toastr: ToastrService) {}
+  constructor(public questionBankService: QuestionBankService, private toastr: ToastrService) {}
 
   /**
    * Method to call service to upload file

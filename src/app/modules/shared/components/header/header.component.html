@@ -1,14 +1,16 @@
 <div>
-  <nav class="navbar navbar-expand-lg bg-light">
+  <nav class="navbar navbar-expand-lg bg-light" *ngIf="username$ | async as username">
     <div class="container-fluid">
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" [routerLink]="['/']">Home</a>
           </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" [routerLink]="['./candidate-registration']">Candidate Registration</a>
-          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['./candidate-registration']" *ngIf="isHrTeam$ | async"
+              >Candidate Registration</a
+            >
+          </li>
           <li class="nav-item">
             <div class="row">
               <div class="col">
@@ -16,8 +18,10 @@
                   <button type="button" class="btn" id="dropdownBasic1" ngbDropdownToggle>Question bank</button>
                   <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                     <button ngbDropdownItem>Download Format</button>
-                    <button [routerLink]="['/download-questions']" ngbDropdownItem>Download Questions</button>
-                    <button ngbDropdownItem>Upload Questions</button>
+                    <button ngbDropdownItem [routerLink]="['/question-bank/download-questions']">
+                      Download Questions
+                    </button>
+                    <button ngbDropdownItem [routerLink]="['/question-bank/upload-questions']">Upload Questions</button>
                   </div>
                 </div>
               </div>
@@ -30,6 +34,11 @@
         <button routerLink="/download-questions" class="btn btn-outline-success" type="button">
           Candidate Registration
         </button>
+
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active">{{ username }}</a>
+          <a class="btn btn-outline-primary" (click)="logout()">Logout</a>
+        </div>
       </div>
     </div>
   </nav>
