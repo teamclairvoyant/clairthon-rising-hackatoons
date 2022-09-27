@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   isHrTeam$?: BehaviorSubject<boolean>;
   username$?: BehaviorSubject<string | null>;
 
-  constructor(private socialAuthService: SocialAuthService, private authService: AuthService, private router: Router) {}
+  constructor(private socialAuthService: SocialAuthService, public authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.isHrTeam$ = this.authService.hrTeam$;
