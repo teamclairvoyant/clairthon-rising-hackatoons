@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import SlackNotify from 'slack-notify';
+const MY_SLACK_WEBHOOK_URL = 'http://hooks.slack.com/services/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';
+const slack = SlackNotify(MY_SLACK_WEBHOOK_URL);
 
 @Component({
   selector: 'app-download-questions',
@@ -78,11 +81,18 @@ export class DownloadQuestionsComponent implements OnInit {
     { id: 8, name: 'Azure' },
   ];
 
-  constructor(
-    private fb: FormBuilder,
-  ) {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
+    slack
+      .send('Hello!')
+      .then(() => {
+        console.log('done!');
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
     this.createDownloadForm();
   }
 
@@ -93,5 +103,5 @@ export class DownloadQuestionsComponent implements OnInit {
       questionsCount: this.fb.control('', [Validators.required]),
       level: this.fb.control([]),
     });
-  } 
+  }
 }
