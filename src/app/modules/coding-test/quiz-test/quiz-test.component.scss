@@ -1,0 +1,77 @@
+* {
+  box-sizing: border-box;
+}
+
+// ebf3fa
+// Reusable CSS variables
+$global-radius: 0.35rem;
+$input-border: 2px solid #ccc;
+
+form {
+  color: black;
+  font-family: Arial, sans-serif;
+  margin: 0 auto;
+  max-width: 100%;
+  width: 750px;
+}
+
+h3 {
+  margin-top: 1.3em;
+  margin-bottom: 0.5em;
+}
+
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pill-options {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  // padding: 1em;
+  transition: all 1s ease-in-out;
+}
+
+input[type='radio'] {
+  display: none;
+}
+
+.option {
+  flex-grow: 1;
+}
+
+.option-label {
+  border: $input-border;
+  border-right: 0;
+  box-shadow: inset 0.15rem 0.15rem 0 0 rgba(0, 0, 0, 0.05);
+  display: block;
+  cursor: pointer;
+  padding: 0.5rem 1.5rem 0.4rem;
+  text-align: center;
+  transition: background-color 0.2s ease;
+  width: 100%;
+  &:hover {
+    background-color: rgba(#000, 0.05);
+  }
+  .option:first-of-type & {
+    border-radius: $global-radius 0 0 $global-radius;
+  }
+  .option:last-of-type & {
+    border-right: $input-border;
+    border-radius: 0 $global-radius $global-radius 0;
+  }
+  input[type='radio']:checked + & {
+    background-color: #fe9800;
+    border: 2px solid #fe9800;
+    border-right: 0;
+    box-shadow: inset -0.15rem -0.15rem 0 0 rgba(0, 0, 0, 0.05);
+    color: #fff;
+    cursor: pointer;
+    .option:last-of-type > & {
+      border-right: 2px solid #fe9800;
+    }
+  }
+}
