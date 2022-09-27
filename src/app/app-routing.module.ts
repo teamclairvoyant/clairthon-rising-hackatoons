@@ -6,9 +6,8 @@ import { AuthGuard } from './modules/shared/services/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'general-instructions',
+    path: 'coding-test',
     loadChildren: () => import('./modules/coding-test/coding-test.module').then((m) => m.CodingTestModule),
-    canActivate: [AuthGuard],
   },
   {
     path: 'candidate-registration',

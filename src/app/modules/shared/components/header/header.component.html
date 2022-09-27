@@ -1,12 +1,12 @@
-<div>
+<div *ngIf="!authService.hideHeader">
   <nav class="navbar navbar-expand-lg bg-light" *ngIf="username$ | async as username">
     <div class="container-fluid">
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" [routerLink]="['/']">Home</a>
+          <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link" aria-current="page" [routerLink]="['/']">Home</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">
             <a class="nav-link" [routerLink]="['./candidate-registration']" *ngIf="isHrTeam$ | async"
               >Candidate Registration</a
             >
@@ -15,7 +15,9 @@
             <div class="row">
               <div class="col">
                 <div ngbDropdown>
-                  <button type="button" class="btn" id="dropdownBasic1" ngbDropdownToggle>Question bank</button>
+                  <button type="button" class="btn nav-link" id="dropdownBasic1" ngbDropdownToggle>
+                    Question bank
+                  </button>
                   <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                     <button ngbDropdownItem>Download Format</button>
                     <button ngbDropdownItem [routerLink]="['/question-bank/download-questions']">
@@ -26,9 +28,6 @@
                 </div>
               </div>
             </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['./general-instructions']">General Instructions</a>
           </li>
         </ul>
         <div class="navbar-nav">
