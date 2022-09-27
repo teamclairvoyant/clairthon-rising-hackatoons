@@ -4,9 +4,18 @@ import { QuestionBankRoutingModule } from './question-bank-routing.module';
 import { UploadQuestionsComponent } from './components/upload-questions/upload-questions.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
+import { DownloadQuestionsComponent } from './components/download-questions/download-questions.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
-  declarations: [UploadQuestionsComponent],
-  imports: [CommonModule, QuestionBankRoutingModule, FormsModule, ReactiveFormsModule, NgbProgressbarModule],
+  declarations: [UploadQuestionsComponent, DownloadQuestionsComponent],
+  imports: [
+    CommonModule,
+    QuestionBankRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbProgressbarModule,
+    NgMultiSelectDropDownModule.forRoot(),
+  ],
 })
 export class QuestionBankModule {}

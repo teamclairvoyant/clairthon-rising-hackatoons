@@ -17,7 +17,15 @@ export class RegistrationFormComponent implements OnInit {
   /**
    * Generated test link
    */
-  testLink = 'dummy_generated_test_link';
+  testLink = '';
+  /**
+   * Boolean to check whether test link is copied to clipboard or not
+   */
+  isTestLinkCopied = false;
+  /**
+   * Candidate Id
+   */
+  candidateId = '';
   /**
    * Candidate's total years of technical experience
    */
@@ -50,8 +58,8 @@ export class RegistrationFormComponent implements OnInit {
     { id: 5, name: 'JavaScript' },
     { id: 6, name: 'Python' },
     { id: 7, name: 'Scala' },
-    { id: 7, name: 'Angular' },
-    { id: 8, name: 'Azure' },
+    { id: 8, name: 'Angular' },
+    { id: 9, name: 'Azure' },
   ];
   /**
    * Ng-Multiselect dropdown default settings
@@ -89,13 +97,14 @@ export class RegistrationFormComponent implements OnInit {
     });
   }
 
-  public submitRegistrationForm(registrationForm: FormGroup): void {
-    this.candidateRegistrationService.addCandidateRegistration(registrationForm.value).subscribe(
+  public submitRegistrationForm(): void {
+    this.candidateRegistrationService.addCandidateRegistration(this.registrationForm.value).subscribe(
       (response: any) => {
         if (response?.statusCode) {
+          this.candidateId = JSON.parse(response.body);
           this.toastr.success('Candidate Information Saved Successfully');
-          this.registrationForm.reset();
-          this.router.navigate(['./candidate-registration/candidateList']);
+          // this.registrationForm.reset();
+          // this.router.navigate(['./candidate-registration/candidateList']);
         }
       },
       (_error) => {
@@ -104,12 +113,19 @@ export class RegistrationFormComponent implements OnInit {
     );
   }
 
-  public generateTestLink(registrationForm: FormGroup): void {
-    // TODO - add check here, if user directly clicks on generateTestLink button then first submit the form and then generate test
-    this.submitRegistrationForm(registrationForm);
+  public generateTestLink(): void {
+    if (this.candidateId) {
+      this.testLink = `https://jzoznlcnii.execute-api.ap-south-1.amazonaws.com/dev/generatetestlink?candidateId=${this.candidateId}`;
+    }
   }
 
   public copyTestLinkToClipboard(inputElement: any): void {
-    // TODO - add copy to clipboard functionality
+    inputElement.select();
+    document.execCommand('copy');
+    inputElement.setSelectionRange(0, 0);
+    this.isTestLinkCopied = !this.isTestLinkCopied;
+    setTimeout(() => {
+      this.isTestLinkCopied = !this.isTestLinkCopied;
+    }, 15000);
   }
 }
