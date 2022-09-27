@@ -1,7 +1,8 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { CandidateRegistrationService } from '../../candidate-registration/services/candidate-registration.service';
 import { AuthService } from '../../shared/services/auth.service';
 import { GeneralInstructionsComponent } from './general-instructions.component';
@@ -13,7 +14,7 @@ describe('GeneralInstructionsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [GeneralInstructionsComponent],
-      imports: [RouterModule, RouterTestingModule],
+      imports: [RouterModule, RouterTestingModule, HttpClientTestingModule, ToastrModule.forRoot()],
       providers: [ToastrService, CandidateRegistrationService, AuthService],
     }).compileComponents();
 
