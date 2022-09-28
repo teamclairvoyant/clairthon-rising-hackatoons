@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { finalize } from 'rxjs';
+import { LoadingService } from 'src/app/modules/shared/services/loading.service';
 import { CandidateRegistrationService } from '../../services/candidate-registration.service';
 
 @Component({
@@ -78,7 +80,7 @@ export class RegistrationFormComponent implements OnInit {
     private fb: FormBuilder,
     public candidateRegistrationService: CandidateRegistrationService,
     private toastr: ToastrService,
-    private router: Router,
+    private loadingService: LoadingService,
   ) {}
 
   ngOnInit(): void {
@@ -98,19 +100,23 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   public submitRegistrationForm(): void {
-    this.candidateRegistrationService.addCandidateRegistration(this.registrationForm.value).subscribe(
-      (response: any) => {
-        if (response?.statusCode) {
-          this.candidateId = JSON.parse(response.body);
-          this.toastr.success('Candidate Information Saved Successfully');
-          // this.registrationForm.reset();
-          // this.router.navigate(['./candidate-registration/candidateList']);
-        }
-      },
-      (_error) => {
-        this.toastr.error('Something went wrong, Please try again!!');
-      },
-    );
+    this.loadingService.show();
+    this.candidateRegistrationService
+      .addCandidateRegistration(this.registrationForm.value)
+      .pipe(finalize(() => this.loadingService.hide()))
+      .subscribe(
+        (response: any) => {
+          if (response?.statusCode) {
+            this.candidateId = JSON.parse(response.body);
+            this.toastr.success('Candidate Information Saved Successfully');
+            // this.registrationForm.reset();
+            // this.router.navigate(['./candidate-registration/candidateList']);
+          }
+        },
+        (_error) => {
+          this.toastr.error('Something went wrong, Please try again!!');
+        },
+      );
   }
 
   public generateTestLink(): void {

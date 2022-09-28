@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { QuestionBankService } from '../../services/question-bank.service';
+import { utils } from 'xlsx';
+import { saveAs } from 'file-saver';
+import { LoadingService } from 'src/app/modules/shared/services/loading.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-download-questions',
@@ -11,75 +16,33 @@ export class DownloadQuestionsComponent implements OnInit {
    * downloadForm to download the required set of questions
    */
   downloadForm: FormGroup = {} as FormGroup;
-
-  csvFileData = [
-    ['Alan Walker', 'Singer'],
-    ['Cristiano Ronaldo', 'Footballer'],
-    ['Saina Nehwal', 'Badminton Player'],
-    ['Arijit Singh', 'Singer'],
-    ['Terence Lewis', 'Dancer'],
-  ];
-
   /**
    * Technical Questions Level for selection
    */
-  levels: { id: number; name: string }[] = [
-    { id: 1, name: 'Hard' },
-    { id: 2, name: 'Easy' },
-    { id: 3, name: 'Medium' },
-  ];
-
-  /**
-   * Ng-Multiselect dropdown default settings
-   */
-  dropdownSettings = {
-    singleSelection: false,
-    idField: 'id',
-    textField: 'name',
-    selectAllText: 'Select All',
-    unSelectAllText: 'UnSelect All',
-    itemsShowLimit: 5,
-    allowSearchFilter: false,
-  };
-
-  /**
-   * Candidate's total years of technical experience
-   */
-  yearsOfExperience = [
-    {
-      id: '1-3',
-      years: '1-3 yrs',
-    },
-    {
-      id: '3-5',
-      years: '3-5 yrs',
-    },
-    {
-      id: '5-7',
-      years: '5-7 yrs',
-    },
-    {
-      id: '7+',
-      years: '7+ yrs',
-    },
+  levels: { id: string; name: string }[] = [
+    { id: 'hard', name: 'Hard' },
+    { id: 'easy', name: 'Easy' },
+    { id: 'medium', name: 'Medium' },
   ];
   /**
    * Technical skills list for selection
    */
-  skillsList: { id: number; name: string }[] = [
-    { id: 1, name: 'HTML' },
-    { id: 2, name: 'CSS' },
-    { id: 3, name: 'Bootstrap' },
-    { id: 4, name: 'Java' },
-    { id: 5, name: 'JavaScript' },
-    { id: 6, name: 'Python' },
-    { id: 7, name: 'Scala' },
-    { id: 7, name: 'Angular' },
-    { id: 8, name: 'Azure' },
+  skillsList: { id: string; name: string }[] = [
+    { id: 'html', name: 'HTML' },
+    { id: 'css', name: 'CSS' },
+    { id: 'boostrap', name: 'Bootstrap' },
+    { id: 'java', name: 'Java' },
+    { id: 'javascript', name: 'JavaScript' },
+    { id: 'python', name: 'Python' },
+    { id: 'scala', name: 'Scala' },
+    { id: 'angular', name: 'Angular' },
+    { id: 'azure', name: 'Azure' },
   ];
 
   constructor(
     private fb: FormBuilder,
+    private questionBankService: QuestionBankService,
+    private loadingService: LoadingService,
   ) {}
 
   ngOnInit() {
@@ -88,10 +51,31 @@ export class DownloadQuestionsComponent implements OnInit {
 
   createDownloadForm() {
     this.downloadForm = this.fb.group({
-      techSkills: this.fb.control([], [Validators.required]),
-      techExperience: this.fb.control('', [Validators.required]),
-      questionsCount: this.fb.control('', [Validators.required]),
-      level: this.fb.control([]),
+      skill: this.fb.control('', [Validators.required]),
+      noOfQuestions: this.fb.control('', [Validators.required]),
+      levelOfDifficulty: this.fb.control('', [Validators.required]),
     });
-  } 
+  }
+
+  /**
+   * Utility method to download questions
+   */
+  public downloadQuestions(): void {
+    const { skill, levelOfDifficulty } = this.downloadForm.value;
+    this.loadingService.show();
+    this.questionBankService
+      .downloadQuestions(this.downloadForm.value)
+      .pipe(finalize(() => this.loadingService.hide()))
+      .subscribe((response) => {
+        const rawData = response.map(([Question, Answer]: string[]) => ({ Question, Answer }));
+        const worksheet = utils.json_to_sheet(rawData);
+        /* generate CSV */
+        const csv = utils.sheet_to_csv(worksheet);
+        /* CSV -> Uint8Array -> Blob */
+        const u8 = new TextEncoder().encode(csv);
+        const blob = new Blob([u8], { type: 'text/csv' });
+        /* Saves the file  */
+        saveAs(blob, `${skill}-${levelOfDifficulty}-question-bank.csv`);
+      });
+  }
 }

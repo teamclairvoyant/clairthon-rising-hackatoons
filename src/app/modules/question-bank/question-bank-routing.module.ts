@@ -13,7 +13,12 @@ const routes: Routes = [
   {
     path: 'download-questions',
     component: DownloadQuestionsComponent,
-    pathMatch:'full'
+    pathMatch: 'full',
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'download-questions',
   },
 ];
 

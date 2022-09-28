@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { QuestionBankService } from '../../services/question-bank.service';
@@ -13,7 +14,15 @@ describe('DownloadQuestionsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [DownloadQuestionsComponent],
-      imports: [NgMultiSelectDropDownModule.forRoot(), FormsModule, ReactiveFormsModule, HttpClientTestingModule, ToastrModule.forRoot()],
+      imports: [
+        NgMultiSelectDropDownModule.forRoot(),
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientTestingModule,
+        ToastrModule.forRoot(),
+        NgSelectModule,
+        HttpClientTestingModule,
+      ],
       providers: [FormBuilder, QuestionBankService, ToastrService],
     }).compileComponents();
 
