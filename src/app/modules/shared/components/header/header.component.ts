@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
+import { QuestionBankService } from 'src/app/modules/question-bank/services/question-bank.service';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,12 @@ export class HeaderComponent implements OnInit {
   isHrTeam$?: BehaviorSubject<boolean>;
   username$?: BehaviorSubject<string | null>;
 
-  constructor(private socialAuthService: SocialAuthService, private authService: AuthService, private router: Router) {}
+  constructor(
+    private socialAuthService: SocialAuthService,
+    private authService: AuthService,
+    private router: Router,
+    private questionBankService: QuestionBankService,
+  ) {}
 
   ngOnInit(): void {
     this.isHrTeam$ = this.authService.hrTeam$;
@@ -24,5 +30,9 @@ export class HeaderComponent implements OnInit {
     await this.socialAuthService.signOut();
     this.authService.username = null;
     this.router.navigate(['/login']);
+  }
+
+  downloadCsvFormat() {
+    this.questionBankService.downloadCsvFormat();
   }
 }

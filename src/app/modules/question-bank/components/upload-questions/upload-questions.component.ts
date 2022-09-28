@@ -107,13 +107,4 @@ export class UploadQuestionsComponent {
       }, 200);
     }, 1000);
   }
-
-  /**
-   * Utility method to download questions
-   */
-  public downloadQuestions(): any {
-    this.questionBankService.downloadQuestions({}).subscribe((response) => {
-      console.log('response', response);
-    });
-  }
 }

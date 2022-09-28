@@ -17,7 +17,7 @@
                 <div ngbDropdown>
                   <button type="button" class="btn" id="dropdownBasic1" ngbDropdownToggle>Question bank</button>
                   <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                    <button ngbDropdownItem>Download Format</button>
+                    <button ngbDropdownItem (click)="downloadCsvFormat()">Download Template</button>
                     <button ngbDropdownItem [routerLink]="['/question-bank/download-questions']">
                       Download Questions
                     </button>

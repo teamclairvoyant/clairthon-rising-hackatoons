@@ -31,12 +31,6 @@ export class QuestionBankService {
   }
 
   public downloadQuestions(questionsCriteria: any): Observable<any> {
-    // TODO remove this static body and add type for request body
-    const requestBody = {
-      skill: 'java',
-      levelOfDifficulty: 'hard',
-      noOfQuestions: 1,
-    };
-    return this.http.post<any>(`${this.baseurl}downloadquestions`, requestBody);
+    return this.http.post<any>(`${this.baseurl}downloadquestions`, questionsCriteria);
   }
 }
