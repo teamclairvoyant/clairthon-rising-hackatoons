@@ -8,9 +8,10 @@ import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { SuccessComponent } from './components/success/success.component';
 
 @NgModule({
-  declarations: [HeaderComponent, HomeComponent, LoginComponent, LoaderComponent],
+  declarations: [HeaderComponent, HomeComponent, LoginComponent, LoaderComponent, SuccessComponent],
   exports: [HeaderComponent, LoaderComponent],
   providers: [],
   imports: [CommonModule, BrowserModule, AppRoutingModule, NgbModule, SocialLoginModule],
