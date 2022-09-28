@@ -5,6 +5,11 @@ import { QuizTestComponent } from './quiz-test/quiz-test.component';
 
 const routes: Routes = [
   {
+    path: 'quiz-test',
+    component: QuizTestComponent,
+    pathMatch: 'full',
+  },
+  {
     path: ':id',
     component: GeneralInstructionsComponent,
   },

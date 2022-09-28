@@ -4,11 +4,11 @@
     <div class="d-flex justify-content-around fs-5">
       <div>
         <label>Name: </label>
-        <span> Candidate Name </span>
+        <span> {{ candidateDetails?.name }} </span>
       </div>
       <div>
         <label>EmailId: </label>
-        <span> Candidate EmailId </span>
+        <span> {{ candidateDetails?.email }} </span>
       </div>
     </div>
   </div>
@@ -27,10 +27,10 @@
         <li>No use of additional applications or internet</li>
         <li>Cross Check the name and EmailId on top before starting the test</li>
       </ol>
-      <h6 class="pt-2">For any queries contact HR <b>HR EMAIL ID</b></h6>
+      <h6 class="pt-2">For any queries contact HR <b>hrops@clairvoyantsoft.com</b></h6>
     </div>
   </div>
   <div class="d-flex justify-content-center mt-5">
-    <button type="button" class="btn btn-success">Proceed For Test</button>
+    <button type="button" (click)="proceedToTest()" class="btn btn-success">Proceed To Test</button>
   </div>
 </div>
