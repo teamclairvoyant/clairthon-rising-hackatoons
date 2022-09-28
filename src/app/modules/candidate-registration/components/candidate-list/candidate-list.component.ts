@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { finalize } from 'rxjs';
+import { LoadingService } from 'src/app/modules/shared/services/loading.service';
 import { RegistrationForm } from '../../models/candidate';
 import { CandidateRegistrationService } from '../../services/candidate-registration.service';
 
@@ -23,7 +25,11 @@ export class CandidateListComponent implements OnInit {
   collectionSize: number = 0;
   currentRate = 8;
 
-  constructor(public candidateRegistrationService: CandidateRegistrationService) {}
+  constructor(
+    public candidateRegistrationService: CandidateRegistrationService,
+    private loadingService: LoadingService,
+    private toastr: ToastrService,
+  ) {}
 
   ngOnInit(): void {
     this.getCandidateList();
@@ -33,10 +39,19 @@ export class CandidateListComponent implements OnInit {
    * Get List of all registered candidates
    */
   getCandidateList(): void {
-    this.candidateRegistrationService.getCandidateList().subscribe((response) => {
-      this.candidateList = JSON.parse(response.body);
-      this.collectionSize = this.candidateList.length;
-    });
+    this.loadingService.show();
+    this.candidateRegistrationService
+      .getCandidateList()
+      .pipe(finalize(() => this.loadingService.hide()))
+      .subscribe(
+        (response) => {
+          this.candidateList = JSON.parse(response.body);
+          this.collectionSize = this.candidateList.length;
+        },
+        (_error) => {
+          this.toastr.error('Something went wrong, Please try again!!');
+        },
+      );
   }
 
   generateTestLink(data: RegistrationForm) {

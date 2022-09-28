@@ -30,10 +30,16 @@
             <td>{{ element.completionDate ? element.completionDate : '--' }}</td>
             <td>{{ element.result ? element.result : '--' }}</td>
             <td>
-              <a (click)="generateTestLink(element)"> GenerateTestLink </a>
+              <a
+                class="btn btn-link"
+                (click)="generateTestLink(element)"
+                [ngStyle]="{ cursor: element.result ? 'pointer' : 'not-allowed' }"
+              >
+                GenerateTestLink
+              </a>
             </td>
             <td>
-              <a href="#"> Edit </a>
+              <a class="btn btn-link"> Edit </a>
             </td>
           </tr>
         </tbody>
