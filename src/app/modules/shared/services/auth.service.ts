@@ -17,6 +17,7 @@ export class AuthService {
   public authUser?: SocialUser;
   public username$: BehaviorSubject<string | null> = new BehaviorSubject(this.username);
   public hrTeam$: BehaviorSubject<boolean> = new BehaviorSubject(this.isHRTeam());
+  public hideHeader = false;
 
   public readonly usernameKey = 'leetquestpool-uname';
 

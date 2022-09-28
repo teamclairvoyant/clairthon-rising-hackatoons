@@ -121,7 +121,8 @@ export class RegistrationFormComponent implements OnInit {
 
   public generateTestLink(): void {
     if (this.candidateId) {
-      this.testLink = `https://jzoznlcnii.execute-api.ap-south-1.amazonaws.com/dev/generatetestlink?candidateId=${this.candidateId}`;
+      // TODO - replace localhost with actual site name
+      this.testLink = `http://localhost:4200/coding-test/${this.candidateId}`;
     }
   }
 
@@ -132,6 +133,6 @@ export class RegistrationFormComponent implements OnInit {
     this.isTestLinkCopied = !this.isTestLinkCopied;
     setTimeout(() => {
       this.isTestLinkCopied = !this.isTestLinkCopied;
-    }, 15000);
+    }, 5000);
   }
 }
