@@ -13,6 +13,10 @@ const routes: Routes = [
     path: ':id',
     component: GeneralInstructionsComponent,
   },
+  {
+    path: 'quiz-test',
+    component: QuizTestComponent,
+  },
 ];
 
 @NgModule({

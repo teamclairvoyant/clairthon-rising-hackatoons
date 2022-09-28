@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 import { DownloadQuestionsComponent } from './components/download-questions/download-questions.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [UploadQuestionsComponent, DownloadQuestionsComponent],
@@ -16,6 +17,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     ReactiveFormsModule,
     NgbProgressbarModule,
     NgMultiSelectDropDownModule.forRoot(),
+    NgSelectModule,
   ],
 })
 export class QuestionBankModule {}

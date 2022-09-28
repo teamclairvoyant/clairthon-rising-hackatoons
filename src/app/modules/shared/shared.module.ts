@@ -7,10 +7,11 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
-  declarations: [HeaderComponent, HomeComponent, LoginComponent],
-  exports: [HeaderComponent],
+  declarations: [HeaderComponent, HomeComponent, LoginComponent, LoaderComponent],
+  exports: [HeaderComponent, LoaderComponent],
   providers: [],
   imports: [CommonModule, BrowserModule, AppRoutingModule, NgbModule, SocialLoginModule],
 })

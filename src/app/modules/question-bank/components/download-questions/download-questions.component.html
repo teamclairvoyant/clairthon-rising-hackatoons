@@ -1,66 +1,43 @@
 <div class="container">
   <div class="card">
     <div class="d-flex justify-content-center">
-      <h2 class="p-2">Download Questions Form</h2>
+      <h2 class="p-2">Download Questions</h2>
     </div>
     <form class="p-5 card-body" [formGroup]="downloadForm">
       <div class="form-group mt-3">
         <label for="tech_skills"> Technical Skills: </label>
-        <ng-multiselect-dropdown
-          [placeholder]="'Select Technical Skills'"
-          [settings]="dropdownSettings"
-          [data]="skillsList"
-          formControlName="techSkills"
+        <ng-select
+          placeholder="Select Technical Skill"
+          [items]="skillsList"
+          bindLabel="name"
+          bindValue="id"
+          formControlName="skill"
         >
-        </ng-multiselect-dropdown>
+        </ng-select>
         <small
           class="text-danger"
           *ngIf="
-            downloadForm.get('techSkills')?.invalid &&
-            (downloadForm.get('techSkills')?.dirty || downloadForm.get('techSkills')?.touched)
+            downloadForm.get('skill')?.invalid &&
+            (downloadForm.get('skill')?.dirty || downloadForm.get('skill')?.touched)
           "
         >
           Please provide technical skills.
         </small>
       </div>
       <div class="form-group mt-3">
-        <label for="tech_experience"> Technical Experience: </label>
-        <div *ngFor="let exp of yearsOfExperience; let i = index">
-          <input
-            type="radio"
-            id="tech_experience"
-            formControlName="techExperience"
-            id="radio{{ i }}"
-            name="techExperience"
-            [value]="exp.id"
-          />
-          <label class="custom-control-label m-1" for="radio{{ i }}">
-            {{ exp.years || '?' }}
-          </label>
-        </div>
-        <small
-          class="text-danger"
-          *ngIf="
-            downloadForm.get('techExperience')?.invalid &&
-            (downloadForm.get('techExperience')?.dirty || downloadForm.get('techExperience')?.touched)
-          "
-        >
-          Please provide years of technical experience.
-        </small>
-      </div>
-      <div class="form-group mt-3">
         <label for="questionsCount"> No. of Questions </label>
         <input
-          id="questionsCount"
+          id="noOfQuestions"
+          type="number"
           class="form-control"
-          formControlName="questionsCount"
+          formControlName="noOfQuestions"
           placeholder="Questions Count"
         />
         <small
           class="text-danger"
           *ngIf="
-            downloadForm.get('questionsCount')?.invalid &&
-            (downloadForm.get('questionsCount')?.dirty || downloadForm.get('questionsCount')?.touched)
+            downloadForm.get('noOfQuestions')?.invalid &&
+            (downloadForm.get('noOfQuestions')?.dirty || downloadForm.get('noOfQuestions')?.touched)
           "
         >
           Please provide Questions to be downloaded.
@@ -68,16 +45,31 @@
       </div>
       <div class="form-group mt-3">
         <label for="tech_skills"> Difficulty Level: </label>
-        <ng-multiselect-dropdown
-          [placeholder]="'Select Difficulty Level'"
-          [settings]="dropdownSettings"
-          [data]="levels"
-          formControlName="level"
+        <ng-select
+          placeholder="Select Difficulty Level"
+          [items]="levels"
+          bindLabel="name"
+          bindValue="id"
+          formControlName="levelOfDifficulty"
         >
-        </ng-multiselect-dropdown>
+        </ng-select>
+        <small
+          class="text-danger"
+          *ngIf="
+            downloadForm.get('levelOfDifficulty')?.invalid &&
+            (downloadForm.get('levelOfDifficulty')?.dirty || downloadForm.get('levelOfDifficulty')?.touched)
+          "
+        >
+          Please select the difficulty level for questions.
+        </small>
       </div>
       <div class="form-group mt-3 d-flex justify-content-center">
-        <button class="rounded btn btn-light border" type="submit" [disabled]="downloadForm.invalid">
+        <button
+          type="button"
+          class="btn rounded btn-primary download-btn"
+          [disabled]="downloadForm.invalid"
+          (click)="downloadQuestions()"
+        >
           Download Questions
         </button>
       </div>

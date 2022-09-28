@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { finalize } from 'rxjs';
+import { LoadingService } from 'src/app/modules/shared/services/loading.service';
 import { QuestionBankService } from '../../services/question-bank.service';
 
 @Component({
@@ -17,15 +19,23 @@ export class UploadQuestionsComponent {
    */
   uploadFile?: File;
 
-  constructor(public questionBankService: QuestionBankService, private toastr: ToastrService) {}
+  constructor(
+    public questionBankService: QuestionBankService,
+    private toastr: ToastrService,
+    private loadingService: LoadingService,
+  ) {}
 
   /**
    * Method to call service to upload file
    */
   public addQuestions(): void {
-    this.questionBankService.uploadQuestions(this.uploadFile as File).subscribe(() => {
-      this.toastr.success('Question(s) uploaded successfully');
-    }),
+    this.loadingService.show();
+    this.questionBankService
+      .uploadQuestions(this.uploadFile as File)
+      .pipe(finalize(() => this.loadingService.hide()))
+      .subscribe(() => {
+        this.toastr.success('Question(s) uploaded successfully');
+      }),
       (_error: any) => {
         this.toastr.error('Question uploading failed. Please try again ');
       };
