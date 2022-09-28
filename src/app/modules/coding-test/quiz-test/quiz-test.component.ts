@@ -28,8 +28,6 @@ export class QuizTestComponent {
    */
   timerCount: any;
 
-  constructor() {}
-
   ngOnInit() {
     // Timer calculations
     this.timer(60);
@@ -43,7 +41,7 @@ export class QuizTestComponent {
     // let minute = 1;
     let seconds: number = minute * 60;
     let textSec: any = '0';
-    let statSec: number = 60;
+    let statSec = 60;
 
     const prefix = minute < 10 ? '0' : '';
 
@@ -65,7 +63,7 @@ export class QuizTestComponent {
     }, 1000);
   }
 
-  submitOnlineTest(){
+  submitOnlineTest() {
     // TODO to intergrate API and Logic
   }
 }
