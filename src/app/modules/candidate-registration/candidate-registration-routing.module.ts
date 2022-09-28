@@ -10,7 +10,7 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'candidateList',
+    path: 'candidate-list',
     component: CandidateListComponent,
   },
 ];

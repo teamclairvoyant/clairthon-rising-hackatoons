@@ -11,6 +11,11 @@
               >Candidate Registration</a
             >
           </li>
+          <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link" [routerLink]="['./candidate-registration/candidate-list']" *ngIf="isHrTeam$ | async"
+              >Candidate List</a
+            >
+          </li>
           <li class="nav-item">
             <div class="row">
               <div class="col">
