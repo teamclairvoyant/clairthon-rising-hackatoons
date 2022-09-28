@@ -6,7 +6,7 @@ import { QuizTestComponent } from './quiz-test/quiz-test.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [GeneralInstructionsComponent,QuizTestComponent],
-        imports: [CommonModule, CodingTestRoutingModule,FormsModule,ReactiveFormsModule],
+  declarations: [GeneralInstructionsComponent, QuizTestComponent],
+  imports: [CommonModule, CodingTestRoutingModule, FormsModule, ReactiveFormsModule],
 })
 export class CodingTestModule {}
