@@ -4,119 +4,47 @@ import { ToastrService } from 'ngx-toastr';
 import { RegistrationForm } from '../../models/candidate';
 import { CandidateRegistrationService } from '../../services/candidate-registration.service';
 
-const candidate: RegistrationForm[] = [
-  {
-    id: '1',
-    name: 'Aakansha',
-    email: 'aakansha.choudhary@gmail.com',
-    techSkills: [
-      {
-        id: 0,
-        name: 'HTML',
-      },
-      {
-        id: 1,
-        name: 'CSS',
-      },
-    ],
-    techExperience: '5-7yrs',
-    openPosition: 'front End Developer',
-    completionDate: 'null',
-    result: 'null',
-  },
-  {
-    id: '1',
-    name: 'Aakansha',
-    email: 'aakansha.choudhary@gmail.com',
-    techSkills: [
-      {
-        id: 0,
-        name: 'HTML',
-      },
-    ],
-    techExperience: '5-7yrs',
-    openPosition: 'front End Developer',
-    completionDate: 'null',
-    result: 'null',
-  },
-  {
-    id: '1',
-    name: 'Aakansha',
-    email: 'aakansha.choudhary@gmail.com',
-    techSkills: [
-      {
-        id: 0,
-        name: 'HTML',
-      },
-    ],
-    techExperience: '5-7yrs',
-    openPosition: 'front End Developer',
-    completionDate: 'null',
-    result: 'null',
-  },
-  {
-    id: '1',
-    name: 'Aakansha',
-    email: 'aakansha.choudhary@gmail.com',
-    techSkills: [
-      {
-        id: 0,
-        name: 'HTML',
-      },
-    ],
-    techExperience: '5-7yrs',
-    openPosition: 'front End Developer',
-    completionDate: 'null',
-    result: 'null',
-  },
-  {
-    id: '1',
-    name: 'Aakansha',
-    email: 'aakansha.choudhary@gmail.com',
-    techSkills: [
-      {
-        id: 0,
-        name: 'HTML',
-      },
-    ],
-    techExperience: '5-7yrs',
-    openPosition: 'front End Developer',
-    completionDate: 'null',
-    result: 'null',
-  },
-  {
-    id: '1',
-    name: 'Aakansha',
-    email: 'aakansha.choudhary@gmail.com',
-    techSkills: [
-      {
-        id: 0,
-        name: 'HTML',
-      },
-    ],
-    techExperience: '5-7yrs',
-    openPosition: 'front End Developer',
-    completionDate: 'null',
-    result: 'null',
-  },
-];
-
 @Component({
   selector: 'app-candidate-list',
   templateUrl: './candidate-list.component.html',
   styleUrls: ['./candidate-list.component.scss'],
 })
 export class CandidateListComponent implements OnInit {
+  /**
+   * List of Candidate
+   */
+  candidateList: RegistrationForm[] = [];
 
-   candidateList : RegistrationForm[] = candidate
+  /**
+   * Pagination Setup
+   */
+  page = 1;
+  pageSize = 10;
+  collectionSize: number = 0;
+  currentRate = 8;
 
-  constructor(
-    private fb: FormBuilder,
-    public candidateRegistrationService: CandidateRegistrationService,
-    private toastr: ToastrService,
-  ) {}
+  constructor(public candidateRegistrationService: CandidateRegistrationService) {}
 
   ngOnInit(): void {
-    
+    this.getCandidateList();
+  }
+
+  /**
+   * Get List of all registered candidates
+   */
+  getCandidateList(): void {
+    this.candidateRegistrationService.getCandidateList().subscribe((response) => {
+      this.candidateList = JSON.parse(response.body);
+      this.collectionSize = this.candidateList.length;
+    });
+  }
+
+  generateTestLink(data: RegistrationForm) {
+    console.log(data);
+
+    /* if (this.candidateId) {
+      // TODO - replace localhost with actual site name
+      this.testLink = `http://localhost:4200/coding-test/${this.candidateId}`;
+    } */
   }
 }
