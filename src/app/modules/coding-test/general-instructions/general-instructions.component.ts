@@ -40,7 +40,6 @@ export class GeneralInstructionsComponent implements OnInit {
       (response: any) => {
         if (response?.statusCode) {
           this.candidateDetails = JSON.parse(response.body);
-          console.log('response: ', JSON.parse(response.body));
         }
       },
       (_error) => {
