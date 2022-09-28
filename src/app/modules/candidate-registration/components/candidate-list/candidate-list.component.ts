@@ -40,8 +40,7 @@ export class CandidateListComponent implements OnInit {
   }
 
   generateTestLink(data: RegistrationForm) {
-    console.log(data);
-
+    // TODO to integrate service
     /* if (this.candidateId) {
       // TODO - replace localhost with actual site name
       this.testLink = `http://localhost:4200/coding-test/${this.candidateId}`;
