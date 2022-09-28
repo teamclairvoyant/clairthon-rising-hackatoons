@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { QuestionBankService } from '../../services/question-bank.service';
 import { utils } from 'xlsx';
 import { saveAs } from 'file-saver';
+import { LoadingService } from 'src/app/modules/shared/services/loading.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-download-questions',
@@ -37,7 +39,11 @@ export class DownloadQuestionsComponent implements OnInit {
     { id: 'azure', name: 'Azure' },
   ];
 
-  constructor(private fb: FormBuilder, private questionBankService: QuestionBankService) {}
+  constructor(
+    private fb: FormBuilder,
+    private questionBankService: QuestionBankService,
+    private loadingService: LoadingService,
+  ) {}
 
   ngOnInit() {
     this.createDownloadForm();
@@ -54,19 +60,22 @@ export class DownloadQuestionsComponent implements OnInit {
   /**
    * Utility method to download questions
    */
-  public downloadQuestions(): any {
+  public downloadQuestions(): void {
     const { skill, levelOfDifficulty } = this.downloadForm.value;
-    this.questionBankService.downloadQuestions(this.downloadForm.value).subscribe((response) => {
-      console.log('response', response);
-      const rawData = response.map(([Question, Answer]: string[]) => ({ Question, Answer }));
-      const worksheet = utils.json_to_sheet(rawData);
-      /* generate CSV */
-      const csv = utils.sheet_to_csv(worksheet);
-      /* CSV -> Uint8Array -> Blob */
-      const u8 = new TextEncoder().encode(csv);
-      const blob = new Blob([u8], { type: 'text/csv' });
-      /* Saves the file  */
-      saveAs(blob, `${skill}-${levelOfDifficulty}-question-bank.csv`);
-    });
+    this.loadingService.show();
+    this.questionBankService
+      .downloadQuestions(this.downloadForm.value)
+      .pipe(finalize(() => this.loadingService.hide()))
+      .subscribe((response) => {
+        const rawData = response.map(([Question, Answer]: string[]) => ({ Question, Answer }));
+        const worksheet = utils.json_to_sheet(rawData);
+        /* generate CSV */
+        const csv = utils.sheet_to_csv(worksheet);
+        /* CSV -> Uint8Array -> Blob */
+        const u8 = new TextEncoder().encode(csv);
+        const blob = new Blob([u8], { type: 'text/csv' });
+        /* Saves the file  */
+        saveAs(blob, `${skill}-${levelOfDifficulty}-question-bank.csv`);
+      });
   }
 }

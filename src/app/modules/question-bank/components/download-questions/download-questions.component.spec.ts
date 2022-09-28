@@ -21,6 +21,7 @@ describe('DownloadQuestionsComponent', () => {
         HttpClientTestingModule,
         ToastrModule.forRoot(),
         NgSelectModule,
+        HttpClientTestingModule,
       ],
       providers: [FormBuilder, QuestionBankService, ToastrService],
     }).compileComponents();
