@@ -1,21 +1,54 @@
 <div class="online-Quiz m-4">
   <div class="row">
-    <label><b>Welcome Candidate Name</b></label>
-    <p class="text-center">Round 1 Quiz</p>
+    <div class="col-4">
+      <b>Welcome Candidate Name</b>
+    </div>
+    <div class="col-4 text-center">
+      <p><b>Round 1 Quiz</b></p>
+    </div>
+    <div class="col-4 text-end timer">
+      <b>{{ timerCount }}</b>
+    </div>
   </div>
-  <form>
-    <h3>How do you plan to pay?</h3>
-    <fieldset class="payment">
-      <ul class="pill-options">
-        <li class="option">
-          <input type="radio" name="payment" id="payment-1" /><label for="payment-1" class="option-label"
-            >All Cash</label
-          >
-        </li>
-        <li class="option">
-          <input type="radio" name="payment" id="payment-2" /><label for="payment-2" class="option-label">Loan</label>
-        </li>
-      </ul>
-    </fieldset>
+  <form class="p-5 card-body" [formGroup]="quizTest" (ngSubmit)="submitOnlineTest()">
+    <ng-container *ngFor="let question of questionsList; let i = index">
+      <div class="form-group">
+        <h3>
+          <span>{{ i + 1 }}. </span> {{ question.question }}
+        </h3>
+        <fieldset class="options" formControlName="{{ question.question }}">
+          <ul class="pill-options">
+            <li class="option">
+              <input type="radio" name="options" id="option{{ i }}1" /><label
+                for="option{{ i }}1"
+                class="option-label"
+                >{{ question.option1 }}</label
+              >
+            </li>
+            <li class="option">
+              <input type="radio" name="options" id="option{{ i }}2" /><label
+                for="option{{ i }}2"
+                class="option-label"
+                >{{ question.option2 }}</label
+              >
+            </li>
+            <li class="option">
+              <input type="radio" name="options" id="option{{ i }}3" /><label
+                for="option{{ i }}3"
+                class="option-label"
+                >{{ question.option3 }}</label
+              >
+            </li>
+            <li class="option">
+              <input type="radio" name="options" id="option{{ i }}4" /><label
+                for="option{{ i }}4"
+                class="option-label"
+                >{{ question.option4 }}</label
+              >
+            </li>
+          </ul>
+        </fieldset>
+      </div>
+    </ng-container>
   </form>
 </div>

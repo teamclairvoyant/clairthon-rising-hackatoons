@@ -2,7 +2,6 @@
   box-sizing: border-box;
 }
 
-// ebf3fa
 // Reusable CSS variables
 $global-radius: 0.35rem;
 $input-border: 2px solid #ccc;
@@ -31,7 +30,6 @@ fieldset {
   list-style: none;
   margin: 0;
   padding: 0;
-  // padding: 1em;
   transition: all 1s ease-in-out;
 }
 
@@ -74,4 +72,8 @@ input[type='radio'] {
       border-right: 2px solid #fe9800;
     }
   }
+}
+
+.timer {
+  font-size: 2rem;
 }
