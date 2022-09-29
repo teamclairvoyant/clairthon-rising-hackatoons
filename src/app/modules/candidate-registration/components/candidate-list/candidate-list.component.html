@@ -30,11 +30,10 @@
             <td>{{ element.completionDate ? element.completionDate : '--' }}</td>
             <td>{{ element.result ? element.result : '--' }}</td>
             <td>
-              <!--               [ngStyle]="{ cursor: element.result ? 'pointer' : 'not-allowed' }"
- -->
               <a
                 class="btn btn-link"
                 (click)="generateTestLink(element)"
+                [ngStyle]="{ cursor: element.result ? 'pointer' : 'not-allowed' }"
                 data-bs-toggle="modal"
                 data-bs-target="#generateTestLink"
               >
