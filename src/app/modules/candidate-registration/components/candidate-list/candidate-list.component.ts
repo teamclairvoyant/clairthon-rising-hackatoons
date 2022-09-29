@@ -25,11 +25,15 @@ export class CandidateListComponent implements OnInit {
   collectionSize: number = 0;
   currentRate = 8;
 
+<<<<<<< HEAD
   constructor(
     public candidateRegistrationService: CandidateRegistrationService,
     private loadingService: LoadingService,
     private toastr: ToastrService,
   ) {}
+=======
+  constructor(public candidateRegistrationService: CandidateRegistrationService) {}
+>>>>>>> 46f045b7d8074be423a9c26be9677098e529fbb8
 
   ngOnInit(): void {
     this.getCandidateList();
