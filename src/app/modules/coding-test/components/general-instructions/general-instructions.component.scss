@@ -11,6 +11,13 @@
   list-style-type: disc;
 }
 
-.card-body,.proceed-btn{
+.card-body,
+.proceed-btn {
   padding-top: 5rem;
+}
+
+.box-container {
+  background: aliceblue;
+  padding: 2rem;
+  border-radius: 1rem;
 }
