@@ -41,6 +41,7 @@ export class GeneralInstructionsComponent implements OnInit {
       (response: any) => {
         if (response?.statusCode) {
           this.candidateTestDetails = JSON.parse(response.body);
+          this.candidateTestDetails.testQuestions = this.candidateTestDetails.testQuestions.map(question => ({...question, candidateAnswer: ''})); 
         }
       },
       (_error) => {
