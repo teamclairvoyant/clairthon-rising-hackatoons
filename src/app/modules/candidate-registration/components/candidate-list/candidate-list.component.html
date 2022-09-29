@@ -30,10 +30,13 @@
             <td>{{ element.completionDate ? element.completionDate : '--' }}</td>
             <td>{{ element.result ? element.result : '--' }}</td>
             <td>
+              <!--               [ngStyle]="{ cursor: element.result ? 'pointer' : 'not-allowed' }"
+ -->
               <a
                 class="btn btn-link"
                 (click)="generateTestLink(element)"
-                [ngStyle]="{ cursor: element.result ? 'pointer' : 'not-allowed' }"
+                data-bs-toggle="modal"
+                data-bs-target="#generateTestLink"
               >
                 GenerateTestLink
               </a>
@@ -52,6 +55,50 @@
         [pageSize]="pageSize"
         class="d-flex justify-content-center"
       ></ngb-pagination>
+    </div>
+  </div>
+</div>
+
+<!-- Generated Test Link Modal -->
+<div class="modal fade" id="generateTestLink" tabindex="-1" aria-labelledby="test-link" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="test-link">Generated Test link</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body form-group">
+        <label> Test Link: </label>
+        <div class="p-1">
+          <input class="test-link" type="text" id="testLink" readonly [(ngModel)]="testLink" #test_link />
+          <span
+            class="img-link m-0 position-absolute"
+            role="button"
+            *ngIf="!isTestLinkCopied"
+            (click)="copyTestLinkToClipboard(test_link)"
+          >
+            <img src="assets/images/copy-icon.svg" [alt]="'copy'" width="34" height="34" />
+          </span>
+          <span role="button" class="img-link m-0 position-absolute" *ngIf="isTestLinkCopied">
+            <img src="assets/images/tick-icon.svg" alt="Copied" width="34" height="34" />
+          </span>
+          <div class="d-flex align-items-center justify-content-between">
+            <a
+              class="open-link cursor-pointer text-underline m-0"
+              [href]="testLink"
+              *ngIf="testLink !== ''"
+              target="_blank"
+              (click)="$event.stopPropagation()"
+            >
+              Open in new window
+            </a>
+            <span class="copied float-right" *ngIf="isTestLinkCopied"> Copied to clipboard </span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
     </div>
   </div>
 </div>

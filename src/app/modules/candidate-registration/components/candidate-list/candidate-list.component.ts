@@ -16,7 +16,14 @@ export class CandidateListComponent implements OnInit {
    * List of Candidate
    */
   candidateList: RegistrationForm[] = [];
-
+  /**
+   * Generated test link
+   */
+  testLink = '';
+  /**
+   * Boolean to check whether test link is copied to clipboard or not
+   */
+  isTestLinkCopied = false;
   /**
    * Pagination Setup
    */
@@ -55,10 +62,20 @@ export class CandidateListComponent implements OnInit {
   }
 
   generateTestLink(data: RegistrationForm) {
-    // TODO to integrate service
-    /* if (this.candidateId) {
+    console.log(data);
+    if (data.id) {
       // TODO - replace localhost with actual site name
-      this.testLink = `http://localhost:4200/coding-test/${this.candidateId}`;
-    } */
+      this.testLink = `http://localhost:4200/coding-test/${data.id}`;
+    }
+  }
+
+  public copyTestLinkToClipboard(inputElement: any): void {
+    inputElement.select();
+    document.execCommand('copy');
+    inputElement.setSelectionRange(0, 0);
+    this.isTestLinkCopied = !this.isTestLinkCopied;
+    setTimeout(() => {
+      this.isTestLinkCopied = !this.isTestLinkCopied;
+    }, 5000);
   }
 }

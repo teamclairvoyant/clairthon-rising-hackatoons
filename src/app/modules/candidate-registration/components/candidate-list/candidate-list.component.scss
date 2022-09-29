@@ -10,3 +10,35 @@
 .disableLink {
   cursor: not-allowed;
 }
+
+.test-link {
+  width: 94%;
+}
+
+.copied {
+  color: #85878a;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.img-link {
+  background: #e5ebf5;
+  right: 17px;
+  border-radius: 0 7px 7px 0;
+  height: 32px;
+  top: 43px;
+}
+
+.open-link {
+  color: #6d6e71;
+  font-size: 12px;
+  font-weight: 400;
+
+  &:hover {
+    color: #4e72b8;
+  }
+}
+
+.position-absolute {
+  position: absolute;
+}
