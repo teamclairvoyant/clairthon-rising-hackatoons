@@ -86,7 +86,6 @@ export class CandidateListComponent implements OnInit {
    * @param details candidateDetails on which edit is clicked
    */
   editCandidateDetails(details: RegistrationForm) {
-    console.log(details);
     this.router.navigate(['./candidate-registration/edit'], { state: { candidateDetails: details } });
   }
 }
