@@ -117,8 +117,6 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   public submitRegistrationForm(): void {
-    console.log(this.registrationForm.value);
-    
     this.loadingService.show();
     this.candidateRegistrationService
       .addCandidateRegistration(this.registrationForm.value)
@@ -153,6 +151,10 @@ export class RegistrationFormComponent implements OnInit {
     }, 5000);
   }
 
+  /**
+   * Update Candidate detials
+   * @param candidateDetails : Already filled details of an candidate
+   */
   private setCandidateDetails(candidateDetails: RegistrationForm) {
     this.registrationForm.patchValue({
       id: candidateDetails.id,
