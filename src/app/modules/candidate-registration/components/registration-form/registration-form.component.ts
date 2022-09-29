@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
 import { LoadingService } from 'src/app/modules/shared/services/loading.service';
+import { RegistrationForm } from '../../models/candidate';
 import { CandidateRegistrationService } from '../../services/candidate-registration.service';
 
 @Component({
@@ -63,6 +64,7 @@ export class RegistrationFormComponent implements OnInit {
     { id: 8, name: 'Angular' },
     { id: 9, name: 'Azure' },
   ];
+
   /**
    * Ng-Multiselect dropdown default settings
    */
@@ -76,15 +78,30 @@ export class RegistrationFormComponent implements OnInit {
     allowSearchFilter: false,
   };
 
+  /**
+   * candidate details , when routing from Edit
+   */
+  candidateDetails: RegistrationForm[] = [];
+
   constructor(
     private fb: FormBuilder,
     public candidateRegistrationService: CandidateRegistrationService,
     private toastr: ToastrService,
     private loadingService: LoadingService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
     this.createRegistrationForm();
+
+    if (this.router.url.includes('/edit')) {
+      const details = window?.history?.state['candidateDetails'] || {};
+      if (Object.keys(details).length !== 0) {
+        this.candidateDetails = details;
+        this.setCandidateDetails(details);
+        console.log(this.candidateDetails);
+      }
+    }
   }
 
   private createRegistrationForm(): void {
@@ -100,6 +117,8 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   public submitRegistrationForm(): void {
+    console.log(this.registrationForm.value);
+    
     this.loadingService.show();
     this.candidateRegistrationService
       .addCandidateRegistration(this.registrationForm.value)
@@ -132,5 +151,17 @@ export class RegistrationFormComponent implements OnInit {
     setTimeout(() => {
       this.isTestLinkCopied = !this.isTestLinkCopied;
     }, 5000);
+  }
+
+  private setCandidateDetails(candidateDetails: RegistrationForm) {
+    this.registrationForm.patchValue({
+      id: candidateDetails.id,
+      name: candidateDetails.name,
+      email: candidateDetails.email,
+      contactNumber: candidateDetails.contactNumber,
+      techSkills: candidateDetails.techSkills,
+      techExperience: candidateDetails.techExperience,
+      openPosition: candidateDetails.openPosition,
+    });
   }
 }
