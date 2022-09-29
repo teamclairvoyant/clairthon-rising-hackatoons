@@ -28,10 +28,6 @@ export interface RegistrationForm {
    */
   techExperience: string;
   /**
-   * Date of completion test
-   */
-  completionDate?: string;
-  /**
    * Pass/fail result
    */
   result?: string;

@@ -10,8 +10,8 @@
             <th scope="col">Technical Skills</th>
             <th scope="col">Experience</th>
             <th scope="col">Open Position</th>
-            <th scope="col">Completion Date</th>
             <th scope="col">Result</th>
+            <th scope="col">Feedback Link</th>
             <th scope="col">TestLink</th>
             <th scope="col">Edit</th>
           </tr>
@@ -27,13 +27,16 @@
             </td>
             <td>{{ element.techExperience }}</td>
             <td>{{ element.openPosition }}</td>
-            <td>{{ element.completionDate ? element.completionDate : '--' }}</td>
             <td>{{ element.result ? element.result : '--' }}</td>
+            <td>
+              <!--TODO Feedback Link integration -->
+              --
+            </td>
             <td>
               <a
                 class="btn btn-link"
                 (click)="generateTestLink(element)"
-                [ngStyle]="{ cursor: element.result ? 'pointer' : 'not-allowed' }"
+                [ngStyle]="{ cursor: element.result ? 'not-allowed' : 'pointer' }"
                 data-bs-toggle="modal"
                 data-bs-target="#generateTestLink"
               >

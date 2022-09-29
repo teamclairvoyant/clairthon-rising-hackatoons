@@ -2,11 +2,6 @@
   margin-top: 4rem;
 }
 
-.spacing {
-  margin: 0 25rem;
-  padding: 0 2rem;
-}
-
 .order-list-type {
   list-style-type: disc;
 }
@@ -14,10 +9,8 @@
 .card-body,
 .proceed-btn {
   padding-top: 5rem;
+  display: grid;
+  justify-content: center;
+  align-items: center;
 }
 
-.box-container {
-  background: aliceblue;
-  padding: 2rem;
-  border-radius: 1rem;
-}

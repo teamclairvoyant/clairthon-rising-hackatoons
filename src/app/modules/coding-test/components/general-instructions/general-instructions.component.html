@@ -1,20 +1,19 @@
-<div class="container box-container" id="online-Quiz">
+<div class="container" id="online-Quiz">
   <div class="card">
-    <h3 class="text-center pt-4">Quiz Name</h3>
+    <h4 class="text-center pt-4">General Instructions</h4>
     <div class="d-flex justify-content-around fs-5 pt-4">
       <div>
         <label><b>Name:</b> </label>
-        <span> {{ candidateTestDetails?.name }} </span>
+        <span> {{ candidateTestDetails.name }} </span>
       </div>
       <div>
         <label><b>EmailId: </b></label>
-        <span> {{ candidateTestDetails?.email }} </span>
+        <span> {{ candidateTestDetails.email }} </span>
       </div>
     </div>
 
     <div class="card-body">
-      <h4 class="text-center">General Instructions</h4>
-      <div class="pt-2 spacing">
+      <div class="fs-5">
         <strong>TextRules to follow during all online proctored exams:</strong>
         <ol class="order-list-type">
           <li>You must use a functioning webcam and microphone</li>
