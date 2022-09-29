@@ -31,4 +31,8 @@ export class CandidateRegistrationService {
   public generateTestLink(candidateId: string): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}generatetestlink?candidateId=${candidateId}`);
   }
+
+  public getCandidateList() {
+    return this.http.get<any>(`${this.baseUrl}/getcandidatedetails`);
+  }
 }

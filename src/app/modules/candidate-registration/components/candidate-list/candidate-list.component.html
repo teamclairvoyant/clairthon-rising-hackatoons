@@ -1,40 +1,51 @@
 <div class="container" id="candidateTable">
-  <table class="table table-striped table-bordered">
-  <thead>
-    <tr>
-      <th scope="col">Candidate Name</th>
-      <th scope="col">EmailId</th>
-      <th scope="col">Technical Skills</th>
-      <th scope="col">Experience</th>
-      <th scope="col">Open Position</th>
-      <th scope="col">Completion Date</th>
-      <th scope="col">Result</th>
-      <th scope="col">TestLink</th>
-      <th scope="col">Edit</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let element of candidateList">
-      <td>{{ element.name }}</td>
-      <td>{{ element.email }}</td>
-      <td>
-        <ng-container *ngFor="let skills of element.techSkills">
-          {{ skills.name }}
-        </ng-container>
-      </td>
-      <td>{{ element.techExperience }}</td>
-      <td>{{ element.openPosition }}</td>
-      <td>{{ element.completionDate ? element.completionDate : '--' }}</td>
-      <td>{{ element.result ? element.result : '--' }}</td>
-      <td>
-        <!-- (click)="generateTestLink(dataSource.data)" -->
-        <a href="#"> GenerateTestLink </a>
-      </td>
-      <td>
-        <a href="#"> Edit </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <div class="card mt-5">
+    <h4 class="text-center mt-4">List of Registered Candidates</h4>
+    <div class="card-body">
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Candidate Name</th>
+            <th scope="col">EmailId</th>
+            <th scope="col">Technical Skills</th>
+            <th scope="col">Experience</th>
+            <th scope="col">Open Position</th>
+            <th scope="col">Completion Date</th>
+            <th scope="col">Result</th>
+            <th scope="col">TestLink</th>
+            <th scope="col">Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let element of candidateList | slice: (page - 1) * pageSize:page * pageSize">
+            <td>{{ element.name }}</td>
+            <td>{{ element.email }}</td>
+            <td>
+              <ng-container *ngFor="let skills of element.techSkills; let last = last">
+                {{ skills.name }} <span *ngIf="!last">, </span>
+              </ng-container>
+            </td>
+            <td>{{ element.techExperience }}</td>
+            <td>{{ element.openPosition }}</td>
+            <td>{{ element.completionDate ? element.completionDate : '--' }}</td>
+            <td>{{ element.result ? element.result : '--' }}</td>
+            <td>
+              <a (click)="generateTestLink(element)"> GenerateTestLink </a>
+            </td>
+            <td>
+              <a href="#"> Edit </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ngb-pagination
+        [collectionSize]="collectionSize"
+        [(page)]="page"
+        [maxSize]="10"
+        [boundaryLinks]="true"
+        [pageSize]="pageSize"
+        class="d-flex justify-content-center"
+      ></ngb-pagination>
+    </div>
+  </div>
 </div>
-
