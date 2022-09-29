@@ -2,69 +2,67 @@
   <div class="card mt-5">
     <h2 class="text-center pt-5">Download Questions from Bank</h2>
     <div class="card-body">
-      <div class="">
-        <form [formGroup]="downloadForm">
-          <div class="form-group mt-3">
-            <label for="tech_skills"> Technical Skills: </label>
-            <ng-select
-              placeholder="Select Technical Skill"
-              [items]="skillsList"
-              bindLabel="name"
-              bindValue="id"
-              formControlName="skill"
-            >
-            </ng-select>
-            <small
-              class="text-danger"
-              *ngIf="
-                downloadForm.get('skill')?.invalid &&
-                (downloadForm.get('skill')?.dirty || downloadForm.get('skill')?.touched)
-              "
-            >
-              Please provide technical skills.
-            </small>
-          </div>
-          <div class="form-group mt-3">
-            <label for="questionsCount"> No. of Questions </label>
-            <input
-              id="noOfQuestions"
-              type="number"
-              class="form-control"
-              formControlName="noOfQuestions"
-              placeholder="Questions Count"
-            />
-            <small
-              class="text-danger"
-              *ngIf="
-                downloadForm.get('noOfQuestions')?.invalid &&
-                (downloadForm.get('noOfQuestions')?.dirty || downloadForm.get('noOfQuestions')?.touched)
-              "
-            >
-              Please provide Questions to be downloaded.
-            </small>
-          </div>
-          <div class="form-group mt-3">
-            <label for="tech_skills"> Difficulty Level: </label>
-            <ng-select
-              placeholder="Select Difficulty Level"
-              [items]="levels"
-              bindLabel="name"
-              bindValue="id"
-              formControlName="levelOfDifficulty"
-            >
-            </ng-select>
-            <small
-              class="text-danger"
-              *ngIf="
-                downloadForm.get('levelOfDifficulty')?.invalid &&
-                (downloadForm.get('levelOfDifficulty')?.dirty || downloadForm.get('levelOfDifficulty')?.touched)
-              "
-            >
-              Please select the difficulty level for questions.
-            </small>
-          </div>
-        </form>
-      </div>
+      <form [formGroup]="downloadForm">
+        <div class="form-group mt-3">
+          <label for="tech_skills"> Technical Skills: </label>
+          <ng-select
+            placeholder="Select Technical Skill"
+            [items]="skillsList"
+            bindLabel="name"
+            bindValue="id"
+            formControlName="skill"
+          >
+          </ng-select>
+          <small
+            class="text-danger"
+            *ngIf="
+              downloadForm.get('skill')?.invalid &&
+              (downloadForm.get('skill')?.dirty || downloadForm.get('skill')?.touched)
+            "
+          >
+            Please provide technical skills.
+          </small>
+        </div>
+        <div class="form-group mt-3">
+          <label for="questionsCount"> No. of Questions </label>
+          <input
+            id="noOfQuestions"
+            type="number"
+            class="form-control"
+            formControlName="noOfQuestions"
+            placeholder="Questions Count"
+          />
+          <small
+            class="text-danger"
+            *ngIf="
+              downloadForm.get('noOfQuestions')?.invalid &&
+              (downloadForm.get('noOfQuestions')?.dirty || downloadForm.get('noOfQuestions')?.touched)
+            "
+          >
+            Please provide Questions to be downloaded.
+          </small>
+        </div>
+        <div class="form-group mt-3">
+          <label for="tech_skills"> Difficulty Level: </label>
+          <ng-select
+            placeholder="Select Difficulty Level"
+            [items]="levels"
+            bindLabel="name"
+            bindValue="id"
+            formControlName="levelOfDifficulty"
+          >
+          </ng-select>
+          <small
+            class="text-danger"
+            *ngIf="
+              downloadForm.get('levelOfDifficulty')?.invalid &&
+              (downloadForm.get('levelOfDifficulty')?.dirty || downloadForm.get('levelOfDifficulty')?.touched)
+            "
+          >
+            Please select the difficulty level for questions.
+          </small>
+        </div>
+      </form>
       <button
         type="button"
         class="btn btn-primary download-btn"
