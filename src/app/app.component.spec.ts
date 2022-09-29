@@ -4,13 +4,14 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './modules/shared/components/header/header.component';
+import { LoaderComponent } from './modules/shared/components/loader/loader.component';
 import { MockSocialAuthService } from './modules/shared/services/mock/mock-social-auth.service';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule, SocialLoginModule, HttpClientTestingModule],
-      declarations: [AppComponent, HeaderComponent],
+      declarations: [AppComponent, HeaderComponent, LoaderComponent],
       providers: [{ provide: SocialAuthService, useClass: MockSocialAuthService }],
     }).compileComponents();
   });
