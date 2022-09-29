@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { CandidateRegistrationService } from '../../candidate-registration/services/candidate-registration.service';
-import { AuthService } from '../../shared/services/auth.service';
+import { CandidateRegistrationService } from '../../../candidate-registration/services/candidate-registration.service';
+import { AuthService } from '../../../shared/services/auth.service';
+import { CandidateTestDetails } from '../../models/test-details';
 
 @Component({
   selector: 'app-general-instructions',
@@ -15,9 +16,9 @@ export class GeneralInstructionsComponent implements OnInit {
    */
   candidateId = '';
   /**
-   * Candidate details
+   * Contains information related quiz and candidate
    */
-  candidateDetails: any;
+  candidateTestDetails = {} as CandidateTestDetails;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,7 +40,7 @@ export class GeneralInstructionsComponent implements OnInit {
     this.candidateRegistrationSer.generateTestLink(this.candidateId).subscribe(
       (response: any) => {
         if (response?.statusCode) {
-          this.candidateDetails = JSON.parse(response.body);
+          this.candidateTestDetails = JSON.parse(response.body);
         }
       },
       (_error) => {
@@ -48,8 +49,7 @@ export class GeneralInstructionsComponent implements OnInit {
     );
   }
 
-  proceedToTest() {
-    // TODO to pass the testQuestions data to quiz component
-    this.router.navigate(['/coding-test/quiz-test']);
+  public proceedToTest(): void {
+    this.router.navigate(['/coding-test/quiz-test'], { state: { candidateTestDetails: this.candidateTestDetails } });
   }
 }

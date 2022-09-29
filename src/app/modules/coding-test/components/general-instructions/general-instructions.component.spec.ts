@@ -3,8 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { CandidateRegistrationService } from '../../candidate-registration/services/candidate-registration.service';
-import { AuthService } from '../../shared/services/auth.service';
+import { CandidateRegistrationService } from '../../../candidate-registration/services/candidate-registration.service';
+import { AuthService } from '../../../shared/services/auth.service';
 import { GeneralInstructionsComponent } from './general-instructions.component';
 
 describe('GeneralInstructionsComponent', () => {

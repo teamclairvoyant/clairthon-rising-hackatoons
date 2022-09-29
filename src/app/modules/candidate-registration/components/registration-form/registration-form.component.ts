@@ -109,8 +109,6 @@ export class RegistrationFormComponent implements OnInit {
           if (response?.statusCode) {
             this.candidateId = JSON.parse(response.body);
             this.toastr.success('Candidate Information Saved Successfully');
-            // this.registrationForm.reset();
-            // this.router.navigate(['./candidate-registration/candidateList']);
           }
         },
         (_error) => {

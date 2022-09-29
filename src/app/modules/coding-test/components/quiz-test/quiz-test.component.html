@@ -1,0 +1,72 @@
+<div class="m-4 box-container">
+  <h3 class="text-center mt-n1">Skill Test</h3>
+  <div class="d-flex justify-content-between">
+    <h5>
+      Welcome <b>{{ candidateTestDetails['name'] }}</b>
+    </h5>
+    <h5>Timer: {{ timerCount }}</h5>
+  </div>
+
+  <div *ngFor="let question of candidateTestDetails['testQuestions']; let i = index">
+    <h3>
+      <span>Q: {{ i + 1 }}. </span> {{ question['question'] }}
+    </h3>
+    <ul class="list-style-none">
+      <li class="p-1">
+        <span class="me-1"> Option 1: </span>
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          (click)="onOptionClick(question['option 1'], i)"
+          [ngClass]="{
+            active: question['option 1'] === question['candidateAnswer']
+          }"
+        >
+          {{ question['option 1'] }}
+        </button>
+      </li>
+      <li class="p-1">
+        <span class="me-1"> Option 2: </span>
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          (click)="onOptionClick(question['option 2'], i)"
+          [ngClass]="{
+            active: question['option 2'] === question['candidateAnswer']
+          }"
+        >
+          {{ question['option 2'] }}
+        </button>
+      </li>
+      <li class="p-1">
+        <span class="me-1"> Option 3: </span>
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          (click)="onOptionClick(question['option 3'], i)"
+          [ngClass]="{
+            active: question['option 3'] === question['candidateAnswer']
+          }"
+        >
+          {{ question['option 3'] }}
+        </button>
+      </li>
+      <li class="p-1">
+        <span class="me-1"> Option 4: </span>
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          (click)="onOptionClick(question['option 4'], i)"
+          [ngClass]="{
+            active: question['option 4'] === question['candidateAnswer']
+          }"
+        >
+          {{ question['option 4'] }}
+        </button>
+      </li>
+    </ul>
+  </div>
+  <div class="d-flex justify-content-center mt-5">
+    <button type="button" (click)="submitTest()" class="btn btn-success">Submit Test</button>
+  </div>
+</div>
