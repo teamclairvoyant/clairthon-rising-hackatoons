@@ -78,11 +78,6 @@ export class RegistrationFormComponent implements OnInit {
     allowSearchFilter: false,
   };
 
-  /**
-   * candidate details , when routing from Edit
-   */
-  candidateDetails: RegistrationForm[] = [];
-
   constructor(
     private fb: FormBuilder,
     public candidateRegistrationService: CandidateRegistrationService,
@@ -97,9 +92,7 @@ export class RegistrationFormComponent implements OnInit {
     if (this.router.url.includes('/edit')) {
       const details = window?.history?.state['candidateDetails'] || {};
       if (Object.keys(details).length !== 0) {
-        this.candidateDetails = details;
         this.setCandidateDetails(details);
-        console.log(this.candidateDetails);
       }
     }
   }
