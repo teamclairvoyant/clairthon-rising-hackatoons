@@ -6,7 +6,7 @@
         <thead>
           <tr>
             <th scope="col">Candidate Name</th>
-            <th scope="col">EmailId</th>
+            <th scope="col">Email</th>
             <th scope="col">Technical Skills</th>
             <th scope="col">Experience</th>
             <th scope="col">Open Position</th>
@@ -28,10 +28,7 @@
             <td>{{ element.techExperience }}</td>
             <td>{{ element.openPosition }}</td>
             <td>{{ element.result ? element.result : '--' }}</td>
-            <td>
-              <!--TODO Feedback Link integration -->
-              --
-            </td>
+            <td><button class="btn btn-link" (click)="navigateToResult(element)">Result</button></td>
             <td>
               <a
                 class="btn btn-link"

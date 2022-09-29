@@ -18,13 +18,6 @@ export class CandidateRegistrationService {
   constructor(private http: HttpClient) {}
 
   public addCandidateRegistration(candidateDetails: RegistrationForm): Observable<any> {
-    // TODO: Use this for static response
-    // const requestBody = {
-    //   name: 'Sneha Devadiga',
-    //   contactDetails: 9702005409,
-    //   skill: 'Java Backend Engineer',
-    //   'years of experience': 9,
-    // };
     return this.http.post<any>(`${this.baseUrl}registercandidatedetails`, candidateDetails);
   }
 
@@ -33,6 +26,10 @@ export class CandidateRegistrationService {
   }
 
   public getCandidateList() {
-    return this.http.get<any>(`${this.baseUrl}/getcandidatedetails`);
+    return this.http.get<any>(`${this.baseUrl}getcandidatedetails`);
+  }
+
+  public getResultDetails(candidateId: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}getcandidatefeedback?candidateId=${candidateId}`);
   }
 }
