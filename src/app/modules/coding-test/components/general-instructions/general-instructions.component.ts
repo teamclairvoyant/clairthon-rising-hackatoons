@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { finalize } from 'rxjs';
+import { LoadingService } from 'src/app/modules/shared/services/loading.service';
 import { CandidateRegistrationService } from '../../../candidate-registration/services/candidate-registration.service';
 import { AuthService } from '../../../shared/services/auth.service';
 import { CandidateTestDetails } from '../../models/test-details';
@@ -26,6 +28,7 @@ export class GeneralInstructionsComponent implements OnInit {
     private toastr: ToastrService,
     private authService: AuthService,
     private router: Router,
+    private loadingService: LoadingService,
   ) {}
 
   ngOnInit() {
@@ -37,17 +40,28 @@ export class GeneralInstructionsComponent implements OnInit {
   }
 
   private getCodingTest(): void {
-    this.candidateRegistrationSer.generateTestLink(this.candidateId).subscribe(
-      (response: any) => {
-        if (response?.statusCode) {
-          this.candidateTestDetails = JSON.parse(response.body);
-          this.candidateTestDetails.testQuestions = this.candidateTestDetails.testQuestions.map(question => ({...question, candidateAnswer: ''})); 
-        }
-      },
-      (_error) => {
-        this.toastr.error('Something went wrong, Please try again!!');
-      },
-    );
+    this.loadingService.show();
+    this.candidateRegistrationSer
+      .generateTestLink(this.candidateId)
+      .pipe(
+        finalize(() => {
+          this.loadingService.hide();
+        }),
+      )
+      .subscribe(
+        (response: any) => {
+          if (response?.statusCode) {
+            this.candidateTestDetails = JSON.parse(response.body);
+            this.candidateTestDetails.testQuestions = this.candidateTestDetails.testQuestions.map((question) => ({
+              ...question,
+              candidateAnswer: '',
+            }));
+          }
+        },
+        (_error) => {
+          this.toastr.error('Something went wrong, Please try again!!');
+        },
+      );
   }
 
   public proceedToTest(): void {

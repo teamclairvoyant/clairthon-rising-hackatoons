@@ -1,3 +1,7 @@
+#online-Quiz {
+  margin-top: 4rem;
+}
+
 .spacing {
   margin: 0 25rem;
   padding: 0 2rem;
@@ -7,8 +11,13 @@
   list-style-type: disc;
 }
 
+.card-body,
+.proceed-btn {
+  padding-top: 5rem;
+}
+
 .box-container {
-  background:aliceblue;
+  background: aliceblue;
   padding: 2rem;
   border-radius: 1rem;
 }

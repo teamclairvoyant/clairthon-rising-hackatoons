@@ -1,35 +1,37 @@
-<div class="m-4 box-container" id="online-Quiz">
-  <div class="p-4">
-    <h3 class="text-center">General Instructions</h3>
-    <div class="d-flex justify-content-around fs-5">
+<div class="container box-container" id="online-Quiz">
+  <div class="card">
+    <h3 class="text-center pt-4">Quiz Name</h3>
+    <div class="d-flex justify-content-around fs-5 pt-4">
       <div>
-        <label>Name: </label>
-        <span> {{ candidateTestDetails.name }} </span>
+        <label><b>Name:</b> </label>
+        <span> {{ candidateTestDetails?.name }} </span>
       </div>
       <div>
-        <label>Email: </label>
-        <span> {{ candidateTestDetails.email }} </span>
+        <label><b>EmailId: </b></label>
+        <span> {{ candidateTestDetails?.email }} </span>
       </div>
     </div>
-  </div>
-  <div class="mb-2">
-    <div class="pt-2 spacing">
-      <strong>TextRules to follow during all online proctored exams:</strong>
-      <ol class="order-list-type">
-        <li>You must use a functioning webcam and microphone</li>
-        <li>No cell phones or other secondary devices in the room or test area</li>
-        <li>Timer will get on as soon as you proceed</li>
-        <li>Accessing new tab will submit the test</li>
-        <li>The testing room must be well-lit and you must be clearly visible</li>
-        <li>No dual screens/monitors</li>
-        <li>Do not leave the camera</li>
-        <li>No use of additional applications or internet</li>
-        <li>Cross Check the name and EmailId on top before starting the test</li>
-      </ol>
-      <h6 class="pt-2">For any queries contact HR <b>hrops@clairvoyantsoft.com</b></h6>
+
+    <div class="card-body">
+      <h4 class="text-center">General Instructions</h4>
+      <div class="pt-2 spacing">
+        <strong>TextRules to follow during all online proctored exams:</strong>
+        <ol class="order-list-type">
+          <li>You must use a functioning webcam and microphone</li>
+          <li>No cell phones or other secondary devices in the room or test area</li>
+          <li>Timer will get on as soon as you proceed</li>
+          <li>Accessing new tab will submit the test</li>
+          <li>The testing room must be well-lit and you must be clearly visible</li>
+          <li>No dual screens/monitors</li>
+          <li>Do not leave the camera</li>
+          <li>No use of additional applications or internet</li>
+          <li>Cross Check the name and EmailId on top before starting the test</li>
+        </ol>
+        <h6 class="pt-2">For any queries contact HR <b>hrops@clairvoyantsoft.com</b></h6>
+      </div>
+      <div class="d-flex justify-content-center proceed-btn">
+        <button type="button" (click)="proceedToTest()" class="btn btn-success">Proceed To Test</button>
+      </div>
     </div>
-  </div>
-  <div class="d-flex justify-content-center mt-5">
-    <button type="button" (click)="proceedToTest()" class="btn btn-success">Proceed To Test</button>
   </div>
 </div>
