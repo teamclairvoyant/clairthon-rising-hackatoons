@@ -149,8 +149,6 @@ export class RegistrationFormComponent implements OnInit {
    * @param candidateDetails Already filled details of an candidate
    */
   private setCandidateDetails(candidateDetails: any) {
-    console.log(candidateDetails);
-
     const { id, name, email, contactNumber, techSkills, techExperience, openPosition } =
       candidateDetails.candidateDetails;
     this.registrationForm.patchValue({ id, name, email, contactNumber, techSkills, techExperience, openPosition });
