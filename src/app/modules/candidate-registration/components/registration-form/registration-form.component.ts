@@ -64,12 +64,10 @@ export class RegistrationFormComponent implements OnInit {
     { id: 8, name: 'Angular' },
     { id: 9, name: 'Azure' },
   ];
-
   /**
    * isSubmitBtn disable state
    */
   isSubmitBtn: boolean = false;
-
   /**
    * Ng-Multiselect dropdown default settings
    */
