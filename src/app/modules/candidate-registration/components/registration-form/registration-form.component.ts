@@ -129,8 +129,7 @@ export class RegistrationFormComponent implements OnInit {
 
   public generateTestLink(): void {
     if (this.candidateId) {
-      // TODO - replace localhost with actual site name
-      this.testLink = `http://localhost:4200/coding-test/${this.candidateId}`;
+      this.testLink = `https://leet-quest-pool.netlify.app/coding-test/${this.candidateId}`;
     }
   }
 

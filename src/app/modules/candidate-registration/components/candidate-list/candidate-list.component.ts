@@ -65,8 +65,7 @@ export class CandidateListComponent implements OnInit {
 
   generateTestLink(data: RegistrationForm) {
     if (data.id) {
-      // TODO - replace localhost with actual site name
-      this.testLink = `http://localhost:4200/coding-test/${data.id}`;
+      this.testLink = `https://leet-quest-pool.netlify.app/coding-test/${data.id}`;
     }
   }
 

@@ -41,7 +41,7 @@
               </td>
               <td class="text-nowrap">
                 <button
-                  class="btn border-0"
+                  class="btn border-0 action-btn"
                   (click)="navigateToResult(element)"
                   [disabled]="!element.result"
                   [ngbTooltip]="'See Result'"
@@ -50,7 +50,7 @@
                 </button>
 
                 <button
-                  class="btn border-0"
+                  class="btn border-0 action-btn"
                   (click)="generateTestLink(element)"
                   [disabled]="element.result"
                   data-bs-toggle="modal"
@@ -60,7 +60,11 @@
                   <i class="fa fa-link" aria-hidden="true"></i>
                 </button>
 
-                <button class="btn" (click)="editCandidateDetails(element)" [ngbTooltip]="'Edit Candidate Details'">
+                <button
+                  class="btn action-btn"
+                  (click)="editCandidateDetails(element)"
+                  [ngbTooltip]="'Edit Candidate Details'"
+                >
                   <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </button>
               </td>
