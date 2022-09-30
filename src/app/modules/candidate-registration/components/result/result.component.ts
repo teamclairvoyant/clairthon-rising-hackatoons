@@ -36,8 +36,6 @@ export class ResultComponent implements OnInit {
       .pipe(finalize(() => this.loadingService.hide()))
       .subscribe((response) => {
         this.candidateDetails = JSON.parse(response.body);
-
-        console.log('this.candidateDetails', this.candidateDetails);
       });
   }
 }
