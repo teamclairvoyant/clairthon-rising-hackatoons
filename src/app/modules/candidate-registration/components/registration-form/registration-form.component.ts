@@ -90,7 +90,7 @@ export class RegistrationFormComponent implements OnInit {
     this.createRegistrationForm();
 
     if (this.router.url.includes('/edit')) {
-      const details = window?.history?.state['candidateDetails'] || {};
+      const details = window?.history?.state['candidateDetails'] || window?.history?.state['candidateDetails'] || {};
       if (Object.keys(details).length !== 0) {
         this.setCandidateDetails(details);
       }
@@ -146,17 +146,10 @@ export class RegistrationFormComponent implements OnInit {
 
   /**
    * Update Candidate detials
-   * @param candidateDetails : Already filled details of an candidate
+   * @param candidateDetails Already filled details of an candidate
    */
   private setCandidateDetails(candidateDetails: RegistrationForm) {
-    this.registrationForm.patchValue({
-      id: candidateDetails.id,
-      name: candidateDetails.name,
-      email: candidateDetails.email,
-      contactNumber: candidateDetails.contactNumber,
-      techSkills: candidateDetails.techSkills,
-      techExperience: candidateDetails.techExperience,
-      openPosition: candidateDetails.openPosition,
-    });
+    const { id, name, email, contactNumber, techSkills, techExperience, openPosition } = candidateDetails;
+    this.registrationForm.patchValue({ id, name, email, contactNumber, techSkills, techExperience, openPosition });
   }
 }
