@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="card mt-5">
+    <h2 class="text-center pt-5">Result</h2>
+    <div class="card-body">
+      <div class="row">
+        <label class="col-1" for="name">Name</label>
+        <div class="col-6" id="name">{{ candidateDetails?.name }}</div>
+      </div>
+      <div class="row">
+        <label class="col-1" for="email">Email</label>
+        <div class="col-6" id="email">{{ candidateDetails?.email }}</div>
+      </div>
+      <div class="row">
+        <label class="col-1" for="status">Status</label>
+        <div
+          class="col-6"
+          id="status"
+          [ngClass]="{
+            'text-danger': candidateDetails?.testStatus !== 'pass',
+            'text-success': candidateDetails?.testStatus === 'pass'
+          }"
+        >
+          {{ candidateDetails?.testStatus }}
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-1" for="score">Score</label>
+        <div class="col-6" id="score">{{ candidateDetails?.totalScore }}/{{ candidateDetails?.totalQuestions }}</div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-8"><strong>Questions</strong></div>
+        <div class="col-4"><strong>Result</strong></div>
+      </div>
+      <div class="row mt-2" *ngFor="let questionList of candidateDetails?.testResult">
+        <div class="col-8">{{ questionList.question }}</div>
+        <div class="col-4">
+          <button
+            class="btn"
+            [ngClass]="{
+              'btn-outline-success': questionList.correctness === 'correct',
+              'btn-outline-danger': questionList.correctness === 'incorrect'
+            }"
+          >
+            {{ questionList.candidateAnswer }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

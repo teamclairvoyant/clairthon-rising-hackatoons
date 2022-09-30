@@ -106,20 +106,22 @@
             Please provide open positions.
           </small>
         </div>
+        <div class="form-group mt-3">
+          <button class="rounded btn btn-primary custon-button" type="submit" [disabled]="registrationForm.invalid">
+            Submit Form
+          </button>
+          <button
+            class="ms-3 rounded btn btn-primary custon-button"
+            type="button"
+            [disabled]="candidateId === ''"
+            (click)="generateTestLink()"
+            data-bs-toggle="modal"
+            data-bs-target="#generateTestLink"
+          >
+            Generate Test Link
+          </button>
+        </div>
       </form>
-      <button class="rounded btn btn-primary custon-button" type="submit" [disabled]="registrationForm.invalid">
-        Submit Form
-      </button>
-      <button
-        class="ms-3 rounded btn btn-primary custon-button"
-        type="button"
-        [disabled]="candidateId === ''"
-        (click)="generateTestLink()"
-        data-bs-toggle="modal"
-        data-bs-target="#generateTestLink"
-      >
-        Generate Test Link
-      </button>
     </div>
   </div>
 

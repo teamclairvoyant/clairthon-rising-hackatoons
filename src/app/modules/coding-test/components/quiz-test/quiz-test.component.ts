@@ -33,7 +33,7 @@ export class QuizTestComponent {
     // Timer calculations
     this.timer(60);
 
-    const details = window?.history?.state['candidateTestDetails'] || {};
+    const details = (window?.history?.state && window?.history?.state['candidateTestDetails']) || {};
     if (Object.keys(details).length !== 0) {
       this.candidateTestDetails = details;
     }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
 import { LoadingService } from 'src/app/modules/shared/services/loading.service';
@@ -30,7 +29,7 @@ export class CandidateListComponent implements OnInit {
    */
   page = 1;
   pageSize = 10;
-  collectionSize: number = 0;
+  collectionSize = 0;
   currentRate = 8;
 
   constructor(
@@ -38,6 +37,7 @@ export class CandidateListComponent implements OnInit {
     private loadingService: LoadingService,
     private toastr: ToastrService,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
@@ -64,7 +64,6 @@ export class CandidateListComponent implements OnInit {
   }
 
   generateTestLink(data: RegistrationForm) {
-    console.log(data);
     if (data.id) {
       // TODO - replace localhost with actual site name
       this.testLink = `http://localhost:4200/coding-test/${data.id}`;
@@ -79,6 +78,12 @@ export class CandidateListComponent implements OnInit {
     setTimeout(() => {
       this.isTestLinkCopied = !this.isTestLinkCopied;
     }, 5000);
+  }
+
+  public navigateToResult(candidateDetails: any): void {
+    this.router.navigate(['result', candidateDetails.id], {
+      relativeTo: this.activatedRoute.parent,
+    });
   }
 
   /**

@@ -7,10 +7,11 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { CandidateListComponent } from './components/candidate-list/candidate-list.component';
-import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ResultComponent } from './components/result/result.component';
 
 @NgModule({
-  declarations: [RegistrationFormComponent,CandidateListComponent],
+  declarations: [RegistrationFormComponent, CandidateListComponent, ResultComponent],
   imports: [
     CommonModule,
     FormsModule,
