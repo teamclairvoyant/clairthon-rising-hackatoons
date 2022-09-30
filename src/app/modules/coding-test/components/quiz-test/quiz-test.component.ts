@@ -11,7 +11,7 @@ import { CodingTestService } from '../../services/coding-test.service';
   templateUrl: './quiz-test.component.html',
   styleUrls: ['./quiz-test.component.scss'],
 })
-export class QuizTestComponent implements OnInit, OnDestroy {
+export class QuizTestComponent implements OnInit {
   /**
    * Contains information related quiz and candidate
    */

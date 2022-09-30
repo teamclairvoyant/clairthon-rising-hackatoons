@@ -66,6 +66,11 @@ export class RegistrationFormComponent implements OnInit {
   ];
 
   /**
+   * isSubmitBtn disable state
+   */
+  isSubmitBtn: boolean = false;
+
+  /**
    * Ng-Multiselect dropdown default settings
    */
   dropdownSettings = {
@@ -118,6 +123,7 @@ export class RegistrationFormComponent implements OnInit {
         (response: any) => {
           if (response?.statusCode) {
             this.candidateId = JSON.parse(response.body);
+            this.isSubmitBtn = true;
             this.toastr.success('Candidate Information Saved Successfully');
           }
         },
@@ -130,6 +136,8 @@ export class RegistrationFormComponent implements OnInit {
   public generateTestLink(): void {
     if (this.candidateId) {
       this.testLink = `https://leet-quest-pool.netlify.app/coding-test/${this.candidateId}`;
+      this.registrationForm.reset();
+      this.isSubmitBtn = false;
     }
   }
 
