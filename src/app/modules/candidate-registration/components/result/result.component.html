@@ -4,11 +4,11 @@
     <div class="card-body">
       <div class="row">
         <label class="col-1" for="name">Name</label>
-        <div class="col-6" id="name">Yashi</div>
+        <div class="col-6" id="name">{{ candidateDetails?.name }}</div>
       </div>
       <div class="row">
         <label class="col-1" for="email">Email</label>
-        <div class="col-6" id="email">yashi@gmail.com</div>
+        <div class="col-6" id="email">{{ candidateDetails?.email }}</div>
       </div>
       <div class="row">
         <label class="col-1" for="status">Status</label>
@@ -25,7 +25,7 @@
       </div>
       <div class="row">
         <label class="col-1" for="score">Score</label>
-        <div class="col-6" id="score">{{ candidateDetails?.totalScore }}</div>
+        <div class="col-6" id="score">{{ candidateDetails?.totalScore }}/{{ candidateDetails?.totalQuestions }}</div>
       </div>
       <hr />
       <div class="row">
