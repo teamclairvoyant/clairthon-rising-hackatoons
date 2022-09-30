@@ -35,11 +35,11 @@ export class GeneralInstructionsComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.candidateId = params['id'] as string;
       this.authService.hideHeader = true;
-      this.getCodingTest();
+      this.getCandidateTestDetails();
     });
   }
 
-  private getCodingTest(): void {
+  private getCandidateTestDetails(): void {
     this.loadingService.show();
     this.candidateRegistrationSer
       .generateTestLink(this.candidateId)

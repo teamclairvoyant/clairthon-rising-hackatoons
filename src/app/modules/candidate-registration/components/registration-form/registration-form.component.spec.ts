@@ -36,4 +36,14 @@ describe('RegistrationFormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should create registration form', () => {
+    expect(component.registrationForm.controls['id']).toBeTruthy();
+    expect(component.registrationForm.controls['name']).toBeTruthy();
+    expect(component.registrationForm.controls['email']).toBeTruthy();
+    expect(component.registrationForm.controls['contactNumber']).toBeTruthy();
+    expect(component.registrationForm.controls['techSkills']).toBeTruthy();
+    expect(component.registrationForm.controls['techExperience']).toBeTruthy();
+    expect(component.registrationForm.controls['openPosition']).toBeTruthy();
+  });
 });
