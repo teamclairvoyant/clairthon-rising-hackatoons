@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
@@ -85,5 +84,13 @@ export class CandidateListComponent implements OnInit {
     this.router.navigate(['result', candidateDetails.id], {
       relativeTo: this.activatedRoute.parent,
     });
+  }
+
+  /**
+   * Edit the candidate details
+   * @param details candidateDetails on which edit is clicked
+   */
+  editCandidateDetails(details: RegistrationForm) {
+    this.router.navigate(['./candidate-registration/edit'], { state: { candidateDetails: details } });
   }
 }

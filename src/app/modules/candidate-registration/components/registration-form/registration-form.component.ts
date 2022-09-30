@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
 import { LoadingService } from 'src/app/modules/shared/services/loading.service';
+import { RegistrationForm } from '../../models/candidate';
 import { CandidateRegistrationService } from '../../services/candidate-registration.service';
 
 @Component({
@@ -63,6 +64,7 @@ export class RegistrationFormComponent implements OnInit {
     { id: 8, name: 'Angular' },
     { id: 9, name: 'Azure' },
   ];
+
   /**
    * Ng-Multiselect dropdown default settings
    */
@@ -81,10 +83,18 @@ export class RegistrationFormComponent implements OnInit {
     public candidateRegistrationService: CandidateRegistrationService,
     private toastr: ToastrService,
     private loadingService: LoadingService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
     this.createRegistrationForm();
+
+    if (this.router.url.includes('/edit')) {
+      const details = window?.history?.state || window?.history?.state['candidateDetails'] || {};
+      if (Object.keys(details).length !== 0) {
+        this.setCandidateDetails(details);
+      }
+    }
   }
 
   private createRegistrationForm(): void {
@@ -132,5 +142,14 @@ export class RegistrationFormComponent implements OnInit {
     setTimeout(() => {
       this.isTestLinkCopied = !this.isTestLinkCopied;
     }, 5000);
+  }
+
+  /**
+   * Update Candidate detials
+   * @param candidateDetails Already filled details of an candidate
+   */
+  private setCandidateDetails(candidateDetails: RegistrationForm) {
+    const { id, name, email, contactNumber, techSkills, techExperience, openPosition } = candidateDetails;
+    this.registrationForm.patchValue({ id, name, email, contactNumber, techSkills, techExperience, openPosition });
   }
 }

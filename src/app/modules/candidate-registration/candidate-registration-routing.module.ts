@@ -18,6 +18,10 @@ const routes: Routes = [
     path: 'result/:candidateId',
     component: ResultComponent,
   },
+  {
+    path: 'edit',
+    component: RegistrationFormComponent,
+  },
 ];
 
 @NgModule({
