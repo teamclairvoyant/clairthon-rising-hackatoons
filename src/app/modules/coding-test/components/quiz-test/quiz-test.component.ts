@@ -33,16 +33,6 @@ export class QuizTestComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.authService.hideHeader = true;
 
-    // Restrict user to navigate Back form browser
-    history.pushState(null, '');
-
-    fromEvent(window, 'popstate')
-      .pipe(takeUntil(this.unsubscriber))
-      .subscribe((_) => {
-        history.pushState(null, '');
-        this.showError = true;
-      });
-
     // Timer calculations
     this.timer(60);
 
@@ -99,10 +89,5 @@ export class QuizTestComponent implements OnInit, OnDestroy {
         this.toastr.error('Something went wrong, Please try again!!');
       },
     );
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscriber.next();
-    this.unsubscriber.complete();
   }
 }
