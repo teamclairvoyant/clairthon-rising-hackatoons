@@ -42,3 +42,22 @@
 .position-absolute {
   position: absolute;
 }
+
+::ng-deep .page-item {
+  &.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #fe9800;
+    border-color: #fe9800;
+  }
+  .page-link {
+    color: #fe9800;
+  }
+}
+
+.action-btn {
+  color: #fe9800;
+  &:disabled {
+    opacity: 0.4;
+  }
+}

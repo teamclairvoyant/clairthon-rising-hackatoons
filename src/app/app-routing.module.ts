@@ -16,7 +16,6 @@ const routes: Routes = [
       import('./modules/candidate-registration/candidate-registration.module').then(
         (m) => m.CandidateRegistrationModule,
       ),
-    canActivate: [AuthGuard],
   },
   {
     path: 'question-bank',
