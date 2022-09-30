@@ -13,6 +13,9 @@ export class AuthService {
     'sudesh.patil@clairvoyantsoft.com',
     'sneha.devadiga@clairvoyantsoft.com',
     'aakansha.choudhary@clairvoyantsoft.com',
+    'akash.bhandwalkar@clairvoyantsoft.com',
+    'rodrigo.rodriguez@clairvoyantsoft.com',
+    'quang.le@clairvoyantsoft.com',
   ];
   public authUser?: SocialUser;
   public username$: BehaviorSubject<string | null> = new BehaviorSubject(this.username);
