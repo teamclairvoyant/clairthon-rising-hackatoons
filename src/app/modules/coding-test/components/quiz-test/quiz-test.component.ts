@@ -1,7 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { fromEvent, Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../../../shared/services/auth.service';
 import { CandidateTestDetails } from '../../models/test-details';
 import { CodingTestService } from '../../services/coding-test.service';
@@ -20,8 +19,6 @@ export class QuizTestComponent implements OnInit {
    * Displays the timer
    */
   timerCount: any;
-  showError: boolean = false;
-  private unsubscriber: Subject<void> = new Subject<void>();
 
   constructor(
     private router: Router,
