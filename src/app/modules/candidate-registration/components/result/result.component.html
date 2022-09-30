@@ -16,8 +16,8 @@
           class="col-6"
           id="status"
           [ngClass]="{
-            'text-danger': candidateDetails?.testStatus !== 'pass',
-            'text-success': candidateDetails?.testStatus === 'pass'
+            'text-danger': candidateDetails?.testStatus !== 'Pass',
+            'text-success': candidateDetails?.testStatus === 'Pass'
           }"
         >
           {{ candidateDetails?.testStatus }}
