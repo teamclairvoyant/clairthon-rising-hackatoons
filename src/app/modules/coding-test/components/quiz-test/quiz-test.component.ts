@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { fromEvent, Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../../../shared/services/auth.service';
 import { CandidateTestDetails } from '../../models/test-details';
 import { CodingTestService } from '../../services/coding-test.service';
@@ -10,7 +11,7 @@ import { CodingTestService } from '../../services/coding-test.service';
   templateUrl: './quiz-test.component.html',
   styleUrls: ['./quiz-test.component.scss'],
 })
-export class QuizTestComponent {
+export class QuizTestComponent implements OnInit, OnDestroy {
   /**
    * Contains information related quiz and candidate
    */
@@ -19,6 +20,8 @@ export class QuizTestComponent {
    * Displays the timer
    */
   timerCount: any;
+  showError: boolean = false;
+  private unsubscriber: Subject<void> = new Subject<void>();
 
   constructor(
     private router: Router,
@@ -29,6 +32,16 @@ export class QuizTestComponent {
 
   ngOnInit() {
     this.authService.hideHeader = true;
+
+    // Restrict user to navigate Back form browser
+    history.pushState(null, '');
+
+    fromEvent(window, 'popstate')
+      .pipe(takeUntil(this.unsubscriber))
+      .subscribe((_) => {
+        history.pushState(null, '');
+        this.showError = true;
+      });
 
     // Timer calculations
     this.timer(60);
@@ -86,5 +99,10 @@ export class QuizTestComponent {
         this.toastr.error('Something went wrong, Please try again!!');
       },
     );
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscriber.next();
+    this.unsubscriber.complete();
   }
 }
