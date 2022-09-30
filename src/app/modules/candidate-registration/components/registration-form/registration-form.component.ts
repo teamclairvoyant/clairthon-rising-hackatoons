@@ -64,7 +64,10 @@ export class RegistrationFormComponent implements OnInit {
     { id: 8, name: 'Angular' },
     { id: 9, name: 'Azure' },
   ];
-
+  /**
+   * isSubmitBtn disable state
+   */
+  isSubmitBtn = false;
   /**
    * Ng-Multiselect dropdown default settings
    */
@@ -118,6 +121,7 @@ export class RegistrationFormComponent implements OnInit {
         (response: any) => {
           if (response?.statusCode) {
             this.candidateId = JSON.parse(response.body);
+            this.isSubmitBtn = true;
             this.toastr.success('Candidate Information Saved Successfully');
           }
         },
@@ -130,6 +134,8 @@ export class RegistrationFormComponent implements OnInit {
   public generateTestLink(): void {
     if (this.candidateId) {
       this.testLink = `https://leet-quest-pool.netlify.app/coding-test/${this.candidateId}`;
+      this.registrationForm.reset();
+      this.isSubmitBtn = false;
     }
   }
 
