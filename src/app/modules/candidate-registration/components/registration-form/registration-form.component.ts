@@ -90,7 +90,7 @@ export class RegistrationFormComponent implements OnInit {
     this.createRegistrationForm();
 
     if (this.router.url.includes('/edit')) {
-      const details = window?.history?.state['candidateDetails'] || window?.history?.state['candidateDetails'] || {};
+      const details = window?.history?.state || window?.history?.state['candidateDetails'] || {};
       if (Object.keys(details).length !== 0) {
         this.setCandidateDetails(details);
       }
