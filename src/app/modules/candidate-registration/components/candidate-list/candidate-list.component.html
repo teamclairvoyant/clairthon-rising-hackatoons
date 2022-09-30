@@ -1,51 +1,73 @@
 <div class="container" id="candidateTable">
   <div class="card mt-5">
-    <h4 class="text-center mt-4">List of Registered Candidates</h4>
+    <h2 class="text-center pt-5">List of Registered Candidates</h2>
     <div class="card-body">
-      <table class="table table-striped table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">Candidate Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Technical Skills</th>
-            <th scope="col">Experience</th>
-            <th scope="col">Open Position</th>
-            <th scope="col">Result</th>
-            <th scope="col">Feedback Link</th>
-            <th scope="col">TestLink</th>
-            <th scope="col">Edit</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let element of candidateList | slice: (page - 1) * pageSize:page * pageSize">
-            <td>{{ element.name }}</td>
-            <td>{{ element.email }}</td>
-            <td>
-              <ng-container *ngFor="let skills of element.techSkills; let last = last">
-                {{ skills.name }} <span *ngIf="!last">, </span>
-              </ng-container>
-            </td>
-            <td>{{ element.techExperience }}</td>
-            <td>{{ element.openPosition }}</td>
-            <td>{{ element.result ? element.result : '--' }}</td>
-            <td><button class="btn btn-link" (click)="navigateToResult(element)">Result</button></td>
-            <td>
-              <a
-                class="btn btn-link"
-                (click)="generateTestLink(element)"
-                [ngStyle]="{ cursor: element.result ? 'not-allowed' : 'pointer' }"
-                data-bs-toggle="modal"
-                data-bs-target="#generateTestLink"
-              >
-                GenerateTestLink
-              </a>
-            </td>
-            <td>
-              <a class="btn btn-link"> Edit </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th scope="col" class="text-center">Candidate Name</th>
+              <th scope="col" class="text-center">Email</th>
+              <th scope="col" class="text-center">Technical Skills</th>
+              <th scope="col" class="text-center">Experience</th>
+              <th scope="col" class="text-center">Open Position</th>
+              <th scope="col" class="text-center">Result</th>
+              <th scope="col" class="text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let element of candidateList | slice: (page - 1) * pageSize:page * pageSize">
+              <td>{{ element.name }}</td>
+              <td>{{ element.email }}</td>
+              <td>
+                <ng-container *ngFor="let skills of element.techSkills; let last = last">
+                  {{ skills.name }} <span *ngIf="!last">, </span>
+                </ng-container>
+              </td>
+              <td>{{ element.techExperience }}</td>
+              <td>{{ element.openPosition }}</td>
+              <td class="text-center">
+                <i
+                  class="fa fa-2x"
+                  aria-hidden="true"
+                  *ngIf="element.result"
+                  [ngbTooltip]="element.result === 'pass' ? 'Pass' : 'Fail'"
+                  [ngClass]="{
+                    'fa-times text-danger': element?.result === 'Fail',
+                    'fa-check-circle text-success': element?.result === 'pass'
+                  }"
+                ></i>
+                <span *ngIf="!element.result">--</span>
+              </td>
+              <td class="text-nowrap">
+                <button
+                  class="btn border-0"
+                  (click)="navigateToResult(element)"
+                  [disabled]="!element.result"
+                  [ngbTooltip]="'See Result'"
+                >
+                  <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                </button>
+
+                <button
+                  class="btn border-0"
+                  (click)="generateTestLink(element)"
+                  [disabled]="element.result"
+                  data-bs-toggle="modal"
+                  data-bs-target="#generateTestLink"
+                  [ngbTooltip]="'Generate Test Link'"
+                >
+                  <i class="fa fa-link" aria-hidden="true"></i>
+                </button>
+
+                <button class="btn" [ngbTooltip]="'Edit Candidate Details'">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <ngb-pagination
         [collectionSize]="collectionSize"
         [(page)]="page"
