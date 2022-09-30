@@ -67,7 +67,7 @@ export class RegistrationFormComponent implements OnInit {
   /**
    * isSubmitBtn disable state
    */
-  isSubmitBtn: boolean = false;
+  isSubmitBtn = false;
   /**
    * Ng-Multiselect dropdown default settings
    */
