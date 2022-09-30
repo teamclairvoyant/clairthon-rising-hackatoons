@@ -33,7 +33,7 @@
 
       <div
         class="show-progress col d-flex justify-content-center align-items-center upload-question"
-        *ngIf="uploadQuestionProgress > 0"
+        *ngIf="uploadQuestionProgress > 0 && uploadFile"
       >
         <div class="d-flex align-items-center flex-grow-1">
           <div class="d-flex">
@@ -43,7 +43,7 @@
             <div class="name">
               {{ uploadFile?.name || '' }}
             </div>
-            <p class="size" *ngIf="uploadFile">
+            <p class="size">
               {{ formatBytes(uploadFile.size) }}
             </p>
             <div class="progress-container">

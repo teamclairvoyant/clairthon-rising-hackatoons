@@ -32,7 +32,13 @@ export class UploadQuestionsComponent {
     this.loadingService.show();
     this.questionBankService
       .uploadQuestions(this.uploadFile as File)
-      .pipe(finalize(() => this.loadingService.hide()))
+      .pipe(
+        finalize(() => {
+          this.loadingService.hide();
+          this.uploadFile = undefined;
+          this.uploadQuestionProgress = 0;
+        }),
+      )
       .subscribe(() => {
         this.toastr.success('Question(s) uploaded successfully');
       }),
