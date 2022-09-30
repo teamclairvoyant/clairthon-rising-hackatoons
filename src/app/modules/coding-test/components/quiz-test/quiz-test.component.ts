@@ -34,7 +34,7 @@ export class QuizTestComponent implements OnInit {
     this.authService.hideHeader = true;
 
     // Timer calculations
-    this.timer(60);
+    this.timer(5);
 
     const details = (window?.history?.state && window?.history?.state['candidateTestDetails']) || {};
     if (Object.keys(details).length !== 0) {
@@ -66,8 +66,8 @@ export class QuizTestComponent implements OnInit {
       this.timerCount = `${prefix}${Math.floor(seconds / 60)}:${textSec}`;
 
       if (seconds == 0) {
-        console.log('finished');
         clearInterval(timer);
+        this.submitTest();
       }
     }, 1000);
   }
