@@ -20,7 +20,7 @@ export class QuizTestComponent implements OnInit, OnDestroy {
    * Displays the timer
    */
   timerCount: any;
-  showError: boolean = false;
+  showError = false;
   private unsubscriber: Subject<void> = new Subject<void>();
 
   constructor(
@@ -76,7 +76,6 @@ export class QuizTestComponent implements OnInit, OnDestroy {
       this.timerCount = `${prefix}${Math.floor(seconds / 60)}:${textSec}`;
 
       if (seconds == 0) {
-        console.log('finished');
         clearInterval(timer);
       }
     }, 1000);
