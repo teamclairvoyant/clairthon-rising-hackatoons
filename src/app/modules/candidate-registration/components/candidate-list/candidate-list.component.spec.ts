@@ -12,6 +12,7 @@ import { CandidateListComponent } from './candidate-list.component';
 describe('CandidateListComponent', () => {
   let component: CandidateListComponent;
   let fixture: ComponentFixture<CandidateListComponent>;
+  let candidateRegistrationService: CandidateRegistrationService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -34,7 +35,23 @@ describe('CandidateListComponent', () => {
     fixture.detectChanges();
   });
 
+  beforeEach(() => {
+    candidateRegistrationService = TestBed.inject(CandidateRegistrationService);
+  });
+
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('gets candidate list data ', () => {
+    const candidateRegistrationServiceSpy = spyOn(
+      component['candidateRegistrationService'],
+      'getCandidateList',
+    ).and.callThrough();
+    candidateRegistrationService.getCandidateList().subscribe((response) => {
+      expect(response).toBeTruthy();
+    });
+    fixture.detectChanges();
+    expect(candidateRegistrationServiceSpy).toHaveBeenCalled();
   });
 });
