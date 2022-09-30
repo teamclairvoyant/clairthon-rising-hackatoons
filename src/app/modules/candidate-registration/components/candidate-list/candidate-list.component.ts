@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
 import { LoadingService } from 'src/app/modules/shared/services/loading.service';
@@ -36,6 +37,7 @@ export class CandidateListComponent implements OnInit {
     public candidateRegistrationService: CandidateRegistrationService,
     private loadingService: LoadingService,
     private toastr: ToastrService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -77,5 +79,13 @@ export class CandidateListComponent implements OnInit {
     setTimeout(() => {
       this.isTestLinkCopied = !this.isTestLinkCopied;
     }, 5000);
+  }
+
+  /**
+   * Edit the candidate details
+   * @param details candidateDetails on which edit is clicked
+   */
+  editCandidateDetails(details: RegistrationForm) {
+    this.router.navigate(['./candidate-registration/edit'], { state: { candidateDetails: details } });
   }
 }

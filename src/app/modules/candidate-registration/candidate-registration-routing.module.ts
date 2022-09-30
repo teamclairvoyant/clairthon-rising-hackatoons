@@ -13,6 +13,10 @@ const routes: Routes = [
     path: 'candidate-list',
     component: CandidateListComponent,
   },
+  {
+    path: 'edit',
+    component: RegistrationFormComponent,
+  },
 ];
 
 @NgModule({
