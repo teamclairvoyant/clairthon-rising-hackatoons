@@ -100,6 +100,8 @@ Also below command will give test coverage.
 ```sh
 npm run test-ci
 ```
+<img width="590" alt="image" src="https://user-images.githubusercontent.com/71638717/195015056-5dfc630e-146d-4c81-bf16-d55a69c85363.png">
+
 
 ## Contributing
 
